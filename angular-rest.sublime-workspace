@@ -1,0 +1,306 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/index.html",
+			"settings":
+			{
+				"buffer_size": 2096,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 311.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 512.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/js/angular-rest/.gitignore",
+		"/D/js/angular-rest/bower.json",
+		"/D/js/angular-seed/app/index.html",
+		"/D/js/angular-rest/app/index.html",
+		"/D/js/angular-seed/bower.json",
+		"/D/test/ins.html",
+		"/D/test/hour.html",
+		"/D/test/one.html",
+		"/D/test/day.html",
+		"/D/test/station.properties",
+		"/D/test/rest.log",
+		"/D/test/localhost.2014-04-23.log",
+		"/D/test/localhost_access_log.2014-04-23.txt",
+		"/D/test/aws.xml",
+		"/C/Users/qxj-hjc/Downloads/echarts-master/build/echarts-plain-map.js",
+		"/C/Users/qxj-hjc/Downloads/echarts-master/build/echarts-plain.js",
+		"/C/Users/qxj-hjc/Downloads/echarts-master/build/echarts-plain-original.js",
+		"/C/Users/qxj-hjc/Downloads/echarts-master/build/echarts-plain-original-map.js",
+		"/D/js/angular-phonecat/app/index.html",
+		"/D/js/angular-phonecat/test/unit/controllersSpec.js",
+		"/F/share/save2/TM联系人00.txt",
+		"/D/js/angular-phonecat/bower.json",
+		"/D/js/angular-phonecat/package.json",
+		"/F/share/save2/TM联系人33.txt",
+		"/F/share/save2/TM联系人5.txt",
+		"/F/share/save2/TM联系人3.txt",
+		"/F/share/save2/TM联系人.txt",
+		"/F/C192876F9F867F57542EF960DC8F8B21.cache.html",
+		"/F/warn.html",
+		"/F/share/save2/文档/2012/全部消息记录.txt",
+		"/C/Users/qxj-hjc/Downloads/mll (1).nh_r1",
+		"/C/Users/qxj-hjc/Downloads/mll (2).nh_r1",
+		"/C/Users/qxj-hjc/Desktop/全部消息记录.txt",
+		"/C/Users/qxj-hjc/Desktop/全部消息记录.bak",
+		"/D/res/mll/nh_r1.xml",
+		"/D/res/station.xml",
+		"/D/res/mll/typhoon.xml",
+		"/D/res/mll/nh_r1_plot.xml",
+		"/C/Users/qxj-hjc/Downloads/mll (6).typhoon",
+		"/D/test/typhoon.csv",
+		"/C/Users/qxj-hjc/Downloads/mll (5).typhoon",
+		"/D/test/temp.csv",
+		"/D/test/mll.typhoon@_orderby=datetime%3AASC&_output=csv&_filter=sno=%22'1301'%22",
+		"/C/Users/qxj-hjc/Downloads/mll (3).typhoon",
+		"/C/Users/qxj-hjc/Downloads/mll.typhoon",
+		"/C/Users/qxj-hjc/Downloads/mll (1).typhoon",
+		"/C/Users/qxj-hjc/Downloads/geoserver-2.5-src/geoserver-2.5/gs-wcs/src/main/java/applicationContext.xml",
+		"/C/Users/qxj-hjc/Downloads/geoserver-2.5-src/geoserver-2.5/gs-wms/src/main/java/org/geoserver/wms/GetMapRequest.java",
+		"/C/Users/qxj-hjc/Downloads/geoserver-2.5-src/geoserver-2.5/gs-wms/src/main/java/org/geoserver/wms/WMSRequests.java",
+		"/C/Users/qxj-hjc/Downloads/geoserver-2.5-src/geoserver-2.5/extension/wps/wps-core/src/main/java/org/geoserver/wps/ppio/CQLFilterPPIO.java",
+		"/C/Users/qxj-hjc/Downloads/geoserver-2.5-src/geoserver-2.5/gs-main/src/main/java/org/geoserver/util/XCQL.java",
+		"/C/Users/qxj-hjc/Downloads/geoserver-2.5-src/geoserver-2.5/gs-main/src/main/java/org/geoserver/ows/kvp/CQLFilterKvpParser.java",
+		"/D/res/meteo/v_aws_day.xml",
+		"/C/Users/qxj-hjc/Downloads/mll.nh_r1",
+		"/F/aws_station_nh.xml",
+		"/C/Users/qxj-hjc/Downloads/meteo.v_aws_day",
+		"/F/station.xml",
+		"/C/Users/qxj-hjc/Downloads/station (3)",
+		"/F/v_station_cn.xml",
+		"/C/Users/qxj-hjc/Downloads/station (4)",
+		"/C/Users/qxj-hjc/Downloads/station (2)",
+		"/D/logs/mylog.txt",
+		"/D/java/tomcat/webapps/restful/WEB-INF/classes/META-INF/spring/restsql-context.xml",
+		"/D/logs/mylog-2014-02-22_11-08.0.log",
+		"/D/logs/mylog-2014-02-21_23-43.0.log",
+		"/D/logs/mylog-2014-02-21_23-47.0.log",
+		"/D/java/tomcat/webapps/restful/WEB-INF/classes/logback.xml",
+		"/C/Users/qxj-hjc/Downloads/station (1)",
+		"/C/Users/sta288/Desktop/新建文本文档.txt",
+		"/C/Users/qxj-hjc/Downloads/station",
+		"/D/program/Sublime3/Data/Packages/User/Preferences.sublime-settings",
+		"/D/java/tomcat/bin/catalina.bat",
+		"/C/Users/qxj-hjc/Desktop/application-context.xml",
+		"/D/java/tomcat/webapps/restful/WEB-INF/web.xml",
+		"/D/logs/mylog-2014-02-20_17-24.0.log",
+		"/D/java/tomcat/webapps/rest/WEB-INF/spring/webmvc-res.xml",
+		"/D/java/tomcat/webapps/rest/WEB-INF/spring/application-context.xml",
+		"/D/java/tomcat/webapps/rest/WEB-INF/classes/logback.xml",
+		"/D/java/maven/bin/mvn",
+		"/D/java/tomcat/webapps/rest/WEB-INF/web.xml"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			",",
+			"G6848",
+			"G6849",
+			"G6852",
+			"2014-4-15",
+			"2014-4-14",
+			"2014-4-10",
+			"2014-4-9",
+			"kXb",
+			"Eeb",
+			"\\u65b0\\u6d6a\\u5fae\\u535a",
+			"Feb",
+			"weibo",
+			"Eeb",
+			"\\u65b0\\u6d6a\\u5fae\\u535a",
+			"\\u65B0;",
+			"&#x535A",
+			"&#x535A;",
+			"Feb",
+			"weibo.",
+			".com",
+			"com",
+			"mobset",
+			"cql"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/index.html",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 2096,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 54.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "angular-rest.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 288.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
