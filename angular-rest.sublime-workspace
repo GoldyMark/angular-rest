@@ -8,34 +8,10 @@
 	"buffers":
 	[
 		{
-			"file": "app/js/controllers.js",
-			"settings":
-			{
-				"buffer_size": 2807,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/css/app.css",
-			"settings":
-			{
-				"buffer_size": 1414,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/js/bootstrap-master/docs/examples/dashboard/index.html",
-			"settings":
-			{
-				"buffer_size": 8792,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "app/index.html",
 			"settings":
 			{
-				"buffer_size": 3221,
+				"buffer_size": 3137,
 				"line_ending": "Unix"
 			}
 		}
@@ -43,9 +19,13 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 311.0,
+		"height": 58.0,
 		"selected_items":
 		[
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
 			[
 				"Package Control: ",
 				"Package Control: Install Package"
@@ -55,7 +35,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 472.0
+		"width": 512.0
 	},
 	"console":
 	{
@@ -76,12 +56,15 @@
 	},
 	"file_history":
 	[
+		"/D/git/angular-rest/app/css/app.css",
+		"/C/Users/hjc/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/D/git/angular-rest/app/js/controllers.js",
+		"/D/js/bootstrap-master/docs/examples/dashboard/index.html",
 		"/D/git/angular-rest/app/index.html",
 		"/D/git/angular-rest/bower.json",
 		"/C/Users/qxj-hjc/Downloads/angular-seed-master/app/js/controllers.js",
 		"/C/Users/qxj-hjc/Downloads/angular-seed-master/app/js/app.js",
 		"/D/git/angular-rest/app/js/app.js",
-		"/D/git/angular-rest/app/css/app.css",
 		"/D/git/angular-rest/app/bower_components/angular-bootstrap-nav-tree/test/test_page.js",
 		"/D/git/angular-rest/app/bower_components/angular-bootstrap-nav-tree/test/bs3_ng120_test_page.html",
 		"/C/Users/qxj-hjc/Downloads/angular-seed-master/app/index.html",
@@ -94,10 +77,8 @@
 		"/D/git/angular-rest/app/bower_components/bootstrap/dist/js/bootstrap.js",
 		"/D/js/bootstrap-master/docs/examples/dashboard/dashboard.css",
 		"/D/git/angular-rest/app/js/services.js",
-		"/D/git/angular-rest/app/js/controllers.js",
 		"/D/git/angular-rest/app/js/filters.js",
 		"/D/git/angular-rest/app/js/directives.js",
-		"/D/js/bootstrap-master/docs/examples/dashboard/index.html",
 		"/D/js/angular-rest/.gitignore",
 		"/D/js/angular-rest/bower.json",
 		"/D/js/angular-seed/app/index.html",
@@ -181,7 +162,7 @@
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -238,122 +219,35 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/js/controllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2807,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2762,
-								2762
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1650.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/css/app.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1414,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1380,
-								1394
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1188.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/D/js/bootstrap-master/docs/examples/dashboard/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8792,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 648.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "app/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3221,
+						"buffer_size": 3137,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3048,
-								3048
+								2376,
+								2376
 							]
 						],
 						"settings":
 						{
+							"origin_encoding": "ASCII",
 							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 810.0,
+						"translation.y": 460.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -364,7 +258,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -400,7 +294,7 @@
 	"project": "angular-rest.sublime-project",
 	"replace":
 	{
-		"height": 62.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -421,11 +315,11 @@
 	},
 	"select_symbol":
 	{
-		"height": 0.0,
+		"height": 392.0,
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 672.0
 	},
 	"settings":
 	{

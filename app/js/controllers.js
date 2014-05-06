@@ -36,7 +36,7 @@ angular.module('restUI.controllers', [])
 					label: 'Chicken',
 					children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
 				}]
-			},{
+			}, {
 				label: 'Animal',
 				children: [{
 					label: 'Dog',
@@ -57,7 +57,7 @@ angular.module('restUI.controllers', [])
 					label: 'Chicken',
 					children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
 				}]
-			},{
+			}, {
 				label: 'Animal',
 				children: [{
 					label: 'Dog',
@@ -78,7 +78,7 @@ angular.module('restUI.controllers', [])
 					label: 'Chicken',
 					children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
 				}]
-			},{
+			}, {
 				label: 'Animal',
 				children: [{
 					label: 'Dog',
@@ -99,7 +99,7 @@ angular.module('restUI.controllers', [])
 					label: 'Chicken',
 					children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
 				}]
-			},{
+			}, {
 				label: 'Animal',
 				children: [{
 					label: 'Dog',
@@ -120,7 +120,7 @@ angular.module('restUI.controllers', [])
 					label: 'Chicken',
 					children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
 				}]
-			},{
+			}, {
 				label: 'Animal',
 				children: [{
 					label: 'Dog',
