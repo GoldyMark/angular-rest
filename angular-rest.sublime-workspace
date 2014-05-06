@@ -14,6 +14,14 @@
 				"buffer_size": 3137,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "/D/js/angular-bootstrap-nav-tree/dist/abn_tree_directive.js",
+			"settings":
+			{
+				"buffer_size": 17288,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
@@ -56,6 +64,7 @@
 	},
 	"file_history":
 	[
+		"/D/js/angular-bootstrap-nav-tree/dist/abn_tree.css",
 		"/D/git/angular-rest/app/css/app.css",
 		"/C/Users/hjc/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
 		"/D/git/angular-rest/app/js/controllers.js",
@@ -162,7 +171,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -235,8 +244,8 @@
 						"selection":
 						[
 							[
-								2376,
-								2376
+								2923,
+								2923
 							]
 						],
 						"settings":
@@ -247,10 +256,41 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 460.0,
+						"translation.y": 1167.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/D/js/angular-bootstrap-nav-tree/dist/abn_tree_directive.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 17288,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 16.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -258,7 +298,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -294,7 +334,7 @@
 	"project": "angular-rest.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
