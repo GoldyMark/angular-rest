@@ -7,5 +7,3 @@ tmp
 .idea
 *.sublime-workspace
 *.sublime-project
-*.sublime-workspace
-angular-rest.sublime-workspace
