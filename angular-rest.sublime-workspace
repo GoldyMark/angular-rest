@@ -19,7 +19,7 @@
 			"file": ".gitignore",
 			"settings":
 			{
-				"buffer_size": 88,
+				"buffer_size": 107,
 				"line_ending": "Windows"
 			}
 		}
@@ -270,15 +270,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 88,
+						"buffer_size": 107,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								88,
-								88
+								107,
+								107
 							]
 						],
 						"settings":
