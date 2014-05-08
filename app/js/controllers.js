@@ -13,135 +13,30 @@ angular.module('restUI.controllers', [])
 */
 
 angular.module('restUI.controllers', [])
-	.controller('AbnTestController', ['$scope',
-		function($scope) {
-			var treedata_avm = [{
-				label: 'Animal',
-				children: [{
-					label: 'Dog',
-					data: {
-						description: "man's best friend"
-					}
-				}, {
-					label: 'Cat',
-					data: {
-						description: "Felis catus"
-					}
-				}, {
-					label: 'Hippopotamus',
-					data: {
-						description: "hungry, hungry"
-					}
-				}, {
-					label: 'Chicken',
-					children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
-				}]
-			}, {
-				label: 'Animal',
-				children: [{
-					label: 'Dog',
-					data: {
-						description: "man's best friend"
-					}
-				}, {
-					label: 'Cat',
-					data: {
-						description: "Felis catus"
-					}
-				}, {
-					label: 'Hippopotamus',
-					data: {
-						description: "hungry, hungry"
-					}
-				}, {
-					label: 'Chicken',
-					children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
-				}]
-			}, {
-				label: 'Animal',
-				children: [{
-					label: 'Dog',
-					data: {
-						description: "man's best friend"
-					}
-				}, {
-					label: 'Cat',
-					data: {
-						description: "Felis catus"
-					}
-				}, {
-					label: 'Hippopotamus',
-					data: {
-						description: "hungry, hungry"
-					}
-				}, {
-					label: 'Chicken',
-					children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
-				}]
-			}, {
-				label: 'Animal',
-				children: [{
-					label: 'Dog',
-					data: {
-						description: "man's best friend"
-					}
-				}, {
-					label: 'Cat',
-					data: {
-						description: "Felis catus"
-					}
-				}, {
-					label: 'Hippopotamus',
-					data: {
-						description: "hungry, hungry"
-					}
-				}, {
-					label: 'Chicken',
-					children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
-				}]
-			}, {
-				label: 'Animal',
-				children: [{
-					label: 'Dog',
-					data: {
-						description: "man's best friend"
-					}
-				}, {
-					label: 'Cat',
-					data: {
-						description: "Felis catus"
-					}
-				}, {
-					label: 'Hippopotamus',
-					data: {
-						description: "hungry, hungry"
-					}
-				}, {
-					label: 'Chicken',
-					children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
-				}]
-			}, {
-				label: 'Animal',
-				children: [{
-					label: 'Dog',
-					data: {
-						description: "man's best friend"
-					}
-				}, {
-					label: 'Cat',
-					data: {
-						description: "Felis catus"
-					}
-				}, {
-					label: 'Hippopotamus',
-					data: {
-						description: "hungry, hungry"
-					}
-				}, {
-					label: 'Chicken',
-					children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
-				}]
-			}];
-			$scope.my_data = treedata_avm;
+	.controller('AbnTestController', ['$scope', '$http', '$window',
+		function($scope, $http, $window) {
+			$scope.my_data = [];
+			$scope.method = 'GET';
+			$scope.url = 'data/treedata.json';
+
+			$scope.fetch = function() {
+				$scope.code = null;
+				$scope.response = null;
+
+				$http({
+					method: $scope.method,
+					url: $scope.url
+				}).
+				success(function(data) {
+					$scope.my_data = data.treedata;
+				}).
+				error(function(data) {
+					$scope.my_data = [];
+					$window.alert("Request failed!");
+				});
+			};
+
+			$scope.fetch();
+
 		}
 	]);

@@ -34,7 +34,7 @@
 <script src="components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js"></script>
 <link href="components/angular-bootstrap-nav-tree/dist/abn_tree.css" rel="stylesheet">
 </head>
-<body ng-controller="AbnTestController">
+<body>
   <!-- fixed nav -->
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <div class="container-fluid mq-full-height">
+  <div class="container-fluid mq-full-height"  ng-controller="AbnTestController">
     <div class="row mq-full-height">
       <!-- left bar tree item -->
       <div class="col-md-3 sidebar mq-full-height">
