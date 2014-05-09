@@ -15,14 +15,12 @@ angular.module('restUI.controllers', [])
 angular.module('restUI.controllers', [])
 	.controller('AbnTestController', ['$scope', '$http', '$window',
 		function($scope, $http, $window) {
+			//tree
 			$scope.my_data = [];
 			$scope.method = 'GET';
 			$scope.url = 'data/treedata.json';
 
 			$scope.fetch = function() {
-				$scope.code = null;
-				$scope.response = null;
-
 				$http({
 					method: $scope.method,
 					url: $scope.url
@@ -37,6 +35,33 @@ angular.module('restUI.controllers', [])
 			};
 
 			$scope.fetch();
+
+			//xml display textarea
+			$scope.editorOptions = {
+				lineWrapping: true,
+				lineNumbers: true,
+				theme: 'twilight',
+				readOnly: 'nocursor',
+				mode: 'xml',
+			};
+			//accordion-group status
+			$scope.accordion_group_status = {
+				one: {
+					open: true,
+					heading: 'Empty'
+				},
+				two: {
+					open: true,
+					heading: 'Empty'
+				},
+				three: {
+					open: true,
+					heading: 'Empty'
+				}
+
+			}
+
+
 
 		}
 	]);

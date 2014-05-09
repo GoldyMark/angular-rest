@@ -26,13 +26,19 @@
 <script src="js/filters.js"></script>
 <script src="js/directives.js"></script>
 
-<!-- Custom -->
+<!-- angular-bootstrap-->
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
 <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-
+<!-- angular-ui-codemirror-->
+<script src="bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
+<script src="bower_components/codemirror/lib/codemirror.js"></script>
+<link href="bower_components/codemirror/lib/codemirror.css" rel="stylesheet">
+<!-- angular-bootstrap-nav-tree-->
 <script src="components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js"></script>
 <link href="components/angular-bootstrap-nav-tree/dist/abn_tree.css" rel="stylesheet">
+
+
 </head>
 <body>
   <!-- fixed nav -->
@@ -67,11 +73,37 @@
       </div>
       <!--main content -->
       <div class="col-md-9 main">
-        <p >Dashboard</p>
-        <p>hello</p>
-      </div>
-    </div>
-  </div>
+        <!-- Split button -->
+        <div class="btn-toolbar" role="toolbar">
+         <button type="button" class="btn btn-primary">展开全部</button>
+         <button type="button" class="btn btn-success">Action</button>
+         <button type="button" class="btn btn-info">Action</button>
+         <button type="button" class="btn btn-danger pull-right">执行</button>
+       </div>
+       <accordion close-others="false">
+       <accordion-group is-open="accordion_group_status.one.open">
+        <accordion-heading>
+        I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':accordion_group_status.one.open, 'glyphicon-chevron-right': !accordion_group_status.one.open}"></i>
+      </accordion-heading>
+      <textarea ui-codemirror="editorOptions" ng-model="x" style="width:100%"></textarea>
+    </accordion-group>
+    <accordion-group is-open="accordion_group_status.two.open">
+    <accordion-heading>
+    I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':accordion_group_status.two.open, 'glyphicon-chevron-right': !accordion_group_status.two.open}"></i>
+  </accordion-heading>
+  <textarea ui-codemirror="editorOptions" ng-model="x" style="width:100%"></textarea>
+</accordion-group>
+<accordion-group is-open="accordion_group_status.three.open">
+<accordion-heading>
+I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':accordion_group_status.three.open, 'glyphicon-chevron-right': !accordion_group_status.three.open}"></i>
+</accordion-heading>
+<textarea ui-codemirror="editorOptions" ng-model="x" style="width:100%"></textarea>
+</accordion-group>
+</accordion>
+
+</div>
+</div>
+</div>
 
 </body>
 </html>
