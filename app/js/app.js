@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('restUI', ['ui.bootstrap','angularBootstrapNavTree','restUI.controllers']);
+angular.module('restUI', ['ui.ace', 'ui.bootstrap', 'angularBootstrapNavTree', 'restUI.controllers']);
 /* Declare app level module which depends on filters, and services
 angular.module('restUI', [
   'ui.bootstrap',
