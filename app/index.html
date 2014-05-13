@@ -5,21 +5,17 @@
 <!--[if gt IE 8]><!-->
 <html lang="zh-cn" ng-app="restUI" class="no-js">
 <!--<![endif]-->
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Restful气象数据共享平台</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="css/app.css" />
     <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
-    <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
--->
+    <!-- In production use:<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>-->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="js/app.js"></script>
@@ -27,7 +23,6 @@
     <script src="js/controllers.js"></script>
     <script src="js/filters.js"></script>
     <script src="js/directives.js"></script>
-
     <!-- angular-bootstrap-->
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
@@ -35,15 +30,10 @@
     <!-- angular-ui-codemirror-->
     <script src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
     <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
-    
-
     <!-- angular-bootstrap-nav-tree-->
     <script src="components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js"></script>
     <link href="components/angular-bootstrap-nav-tree/dist/abn_tree.css" rel="stylesheet">
-
-
 </head>
-
 <body ng-controller="AbnTestController">
     <!-- fixed nav -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -71,7 +61,6 @@
             </div>
         </div>
     </div>
-
     <div class="container-fluid mq-full-height" >
         <div class="row mq-full-height">
             <!-- left bar tree item -->
@@ -87,7 +76,6 @@
             </div>
             <!--main content -->
             <div class="col-md-9 main">
-
                 <accordion close-others="false">
                     <accordion-group is-open="accordion_group_status.one.open">
                         <accordion-heading>
@@ -99,8 +87,6 @@
                         <accordion-heading>
                             {{accordion_group_status.two.heading}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':accordion_group_status.two.open, 'glyphicon-chevron-right': !accordion_group_status.two.open}"></i>
                         </accordion-heading>
-
-
                         <form role="form">
                             <div class="form-group">
                                 <div>
@@ -136,14 +122,11 @@
                                             <label class="btn btn-sm btn-primary" ng-model="radioModel" btn-radio="'Middle'">XML</label>
                                             <label class="btn btn-sm btn-primary" ng-model="radioModel" btn-radio="'Right'">CSV</label>
                                         </div>
-
                                         <button type="button" ng-click="fetch_tree()" class="btn btn-sm btn-danger pull-right">执行</button>
                                         <button type="button" ng-click="fetch_tree()" class="btn btn-sm btn-success pull-right">拼接</button>
                                     </div>
-
                                     <!--<textarea id="textareaResult"  class="form-control"  rows="8"></textarea>-->
                                     <div class="form-control ace_editor" style="height: 180px;"  ui-ace="{theme:'twilight',mode:'xml'}"></div>
-
                                 </div>
                             </div>
                             <div class="form-group">
@@ -160,11 +143,8 @@
                         <p>hello</p>
                     </accordion-group>
                 </accordion>
-
             </div>
         </div>
     </div>
-
 </body>
-
 </html>

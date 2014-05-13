@@ -1,17 +1,11 @@
 'use strict';
-
 /* Controllers 
-
 angular.module('restUI.controllers', [])
   .controller('MyCtrl1', ['$scope', function($scope) {
-
   }])
   .controller('MyCtrl2', ['$scope', function($scope) {
-
   }]);
-
 */
-
 angular.module('restUI.controllers', [])
     .controller('AbnTestController', ['$scope', '$http', '$window',
         function($scope, $http, $window) {
@@ -19,15 +13,10 @@ angular.module('restUI.controllers', [])
             $scope.tree_data = [];
             $scope.method = 'GET';
             $scope.url = 'data/treedata.json';
-
             $scope.resource_tree = {};
-
             $scope.tree_handler = function(branch) {
-
                 //$window.alert("You selected: " + branch.label);
-
             };
-
             $scope.fetch_tree = function() {
                 $http({
                     method: $scope.method,
@@ -42,12 +31,9 @@ angular.module('restUI.controllers', [])
                 });
             };
             $scope.fetch_tree();
-
-
             //xml display textarea
             $scope.resource_editor_model = '';
             $scope.result_editor_model = '';
-
             $scope.editorOptions = {
                 // lineWrapping: true,
                 lineNumbers: true,
@@ -55,8 +41,6 @@ angular.module('restUI.controllers', [])
                 // readOnly: 'nocursor',
                 mode: 'xml'
             };
-
-
             $scope.radioModel = 'Left';
             //accordion-group status
             var rest_resource = 'Rest资源:';
@@ -74,7 +58,5 @@ angular.module('restUI.controllers', [])
                     heading: '其他'
                 }
             }
-
-
         }
     ]);

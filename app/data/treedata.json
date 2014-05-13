@@ -4,7 +4,8 @@
 		"children": [{
 			"label": "Dog",
 			"data": {
-				"description": "man's best friend"
+				"description": "man's best friend",
+				"resource_id":"meteo.v_awsday"
 			}
 		}, {
 			"label": "Dog",
