@@ -12,15 +12,33 @@ angular.module('restUI.controllers', [])
             //tree
             $scope.tree_data = [];
             $scope.method = 'GET';
-            $scope.url = 'data/treedata.json';
+            $scope.tree_url = 'rest/res/load/resourceTree';
             $scope.resource_tree = {};
+            //xml display textarea
+            $scope.resource_editor_model = '';
+            $scope.result_editor_model = '';
+            $scope.resource_base_url = 'rest/res/definition/';
+
             $scope.tree_handler = function(branch) {
-                //$window.alert("You selected: " + branch.label);
+
+                if (branch.data.isLeaf) {
+                    $http({
+                        method: $scope.method,
+                        url: $scope.resource_base_url + branch.data.rid
+                    }).
+                    success(function(data) {
+                        $scope.resource_editor_model = data;
+                        $window.alert($scope.resource_base_url + branch.data.rid);
+                    }).
+                    error(function(data) {
+                        $window.alert("Request sqlResource failed!");
+                    });
+                }
             };
             $scope.fetch_tree = function() {
                 $http({
                     method: $scope.method,
-                    url: $scope.url
+                    url: $scope.tree_url
                 }).
                 success(function(data) {
                     $scope.tree_data = data.treedata;
@@ -31,9 +49,7 @@ angular.module('restUI.controllers', [])
                 });
             };
             $scope.fetch_tree();
-            //xml display textarea
-            $scope.resource_editor_model = '';
-            $scope.result_editor_model = '';
+
             $scope.editorOptions = {
                 // lineWrapping: true,
                 lineNumbers: true,

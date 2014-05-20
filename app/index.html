@@ -81,7 +81,7 @@
                         <accordion-heading>
                             {{accordion_group_status.one.heading}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':accordion_group_status.one.open, 'glyphicon-chevron-right': !accordion_group_status.one.open}"></i>
                         </accordion-heading>
-                        <textarea class="form-control"  ng-model="resource_editor_model" rows="9"></textarea>
+                        <div class="form-control ace_editor"  ng-model="resource_editor_model" style="height: 180px;"  ui-ace="{theme:'twilight',mode:'xml'}"></div>
                     </accordion-group>
                     <accordion-group is-open="accordion_group_status.two.open">
                         <accordion-heading>
