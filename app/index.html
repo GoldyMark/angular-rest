@@ -120,15 +120,15 @@
                                     <!--<label for="textareaResult" class="control-label">结果集:</label>-->
                                     <div class="btn-toolbar" role="toolbar" style="margin-bottom:2px;">
                                         <div class="btn-group">
-                                            <!--<label class="btn btn-sm btn-primary" ng-model="radioModel" btn-radio="'json'">JSON</label>
-                                            <label class="btn btn-sm btn-primary" ng-model="radioModel" btn-radio="'xml'">XML</label>
-                                            <label class="btn btn-sm btn-primary" ng-model="radioModel" btn-radio="'csv'">CSV</label>-->
-                                            <label class="btn btn-default">
+                                            <label class="btn btn-sm btn-primary" ng-change="output_change(radioModel)" ng-model="radioModel" btn-radio="'json'">JSON</label>
+                                            <label class="btn btn-sm btn-primary" ng-change="output_change(radioModel)" ng-model="radioModel" btn-radio="'xml'">XML</label>
+                                            <label class="btn btn-sm btn-primary" ng-change="output_change(radioModel)" ng-model="radioModel" btn-radio="'csv'">CSV</label>
+                                           <!-- <label class="btn btn-default">
                                                 <input type="radio" ng-change="change()" ng-model="radioModel" class="btn btn-default" value="json" />JSON</label>
                                             <label class="btn btn-default">
                                                 <input type="radio" ng-change="change()" ng-model="radioModel" class="btn btn-default" value="xml" />XML</label>
                                             <label class="btn btn-default">
-                                                <input type="radio" ng-change="change()" ng-model="radioModel" class="btn btn-default" value="csv" />CSV</label>
+                                                <input type="radio" ng-change="change()" ng-model="radioModel" class="btn btn-default" value="csv" />CSV</label>-->
                                             <div>{{radioModel}}</div>
                                         </div>
                                         <button type="button" ng-click="fetch_tree()" class="btn btn-sm btn-danger pull-right">执行</button>

@@ -84,18 +84,18 @@ angular.module('restUI.controllers', [])
             $scope.fetch_tree();
 
             //splice form
-            $scope.radioModel = 'xml';
+            $scope.radioModel = 'json';
             $scope.splice = {
                 filter: '',
                 limit: '',
                 offset: '',
                 orderby: '',
                 query: '',
-                output: $scope.radioModel,
+                output: 'json',
                 link: '?'
             };
             $scope.splice_query = function() {
-
+                //$window.alert($scope.radioModel);
                 if (!$scope.check_empty($scope.resource_id)) {
                     var val = $scope.url.resource_base + $scope.resource_id;
                     if (!$scope.check_empty($scope.splice.filter)) {
@@ -127,9 +127,10 @@ angular.module('restUI.controllers', [])
 
             };
 
-            $scope.change = function() {
+            $scope.output_change = function(val) {
 
-                $scope.splice.output = $scope.radioModel;
+                $scope.splice.output = val;
+                $scope.editorOptions.mode = val;
 
             };
 
