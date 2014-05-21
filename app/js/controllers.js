@@ -1,11 +1,5 @@
 'use strict';
-/* Controllers 
-angular.module('restUI.controllers', [])
-  .controller('MyCtrl1', ['$scope', function($scope) {
-  }])
-  .controller('MyCtrl2', ['$scope', function($scope) {
-  }]);
-*/
+/* Controllers */
 angular.module('restUI.controllers', [])
     .controller('AbnTestController', ['$scope', '$http', '$window',
         function($scope, $http, $window) {
@@ -15,22 +9,33 @@ angular.module('restUI.controllers', [])
             $scope.url = {
                 resource_base: 'rest/res/',
                 resource_tree: 'rest/res/load/resourceTree',
-                resource_definition: 'rest/res/definition/'
+                resource_definition: 'rest/res/file/'
             };
 
             //tree
             $scope.tree_data = [];
             $scope.resource_tree = {};
+            $scope.aceeditor = {};
             //ace
             $scope.resource_editor_model = '';
-            $scope.result_editor_model = '';
-            $scope.editorOptions = {
-                // lineWrapping: true,
+            //$scope.result_editor_model = '';
+            $scope.resourceOptions = {
                 lineNumbers: true,
-                theme: 'twilight',
-                // readOnly: 'nocursor',
+                theme: 'textmate',
                 mode: 'xml'
             };
+            $scope.resultOptions = {
+                lineNumbers: true,
+                useWrapMode: true,
+                theme: 'twilight',
+                mode: 'json',
+                onLoad: function(_ace) {
+
+                    // HACK to have the ace instance in the scope...
+                    $scope.aceeditor = _ace;
+                }
+            };
+
 
             //accordion-group status
 
@@ -130,7 +135,35 @@ angular.module('restUI.controllers', [])
             $scope.output_change = function(val) {
 
                 $scope.splice.output = val;
-                $scope.editorOptions.mode = val;
+
+                if (val == 'csv') {
+                    $scope.aceeditor.getSession().setMode('ace/mode/' + 'text');
+                } else {
+                    $scope.aceeditor.getSession().setMode('ace/mode/' + val);
+                }
+
+            };
+
+            $scope.query = function() {
+
+                if (!$scope.check_empty($scope.splice.query)) {
+                    $http({
+                        method: $scope.method,
+                        url: $scope.splice.query
+                    }).
+                    success(function(data) {
+                        if (angular.isObject(data) || angular.isArray(data)) {
+                            $scope.aceeditor.setValue(JSON.stringify(data));
+                        } else {
+                            $scope.aceeditor.setValue(data);
+                        }
+                    }).
+                    error(function(data) {
+                        $scope.result_editor_model = '';
+                        $window.alert("Request failed!");
+                    });
+                }
+
 
             };
 

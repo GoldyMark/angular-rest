@@ -17,20 +17,20 @@
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
     <!-- In production use:<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>-->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/services.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/filters.js"></script>
     <script src="js/directives.js"></script>
     <!-- angular-bootstrap-->
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <!-- angular-ui-codemirror-->
     <script src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
-    <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
+    <script src="bower_components/angular-ui-ace/ui-ace.min.js"></script>
     <!-- angular-bootstrap-nav-tree-->
     <script src="components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js"></script>
     <link href="components/angular-bootstrap-nav-tree/dist/abn_tree.css" rel="stylesheet">
@@ -51,13 +51,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Dashboard</a>
+                    <li><a href="http://10.151.96.18:3131" target="_blank">编辑</a>
                     </li>
-                    <li><a href="#">Settings</a>
-                    </li>
-                    <li><a href="#">Profile</a>
-                    </li>
-                    <li><a href="#">Help</a>
+                    <li><a href="#">帮助</a>
                     </li>
                 </ul>
             </div>
@@ -83,7 +79,7 @@
                         <accordion-heading>
                             {{accordion_group_status.one.heading}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':accordion_group_status.one.open, 'glyphicon-chevron-right': !accordion_group_status.one.open}"></i>
                         </accordion-heading>
-                        <div class="form-control ace_editor" ng-model="resource_editor_model" style="height: 180px;" ui-ace="{theme:'twilight',mode:'xml'}"></div>
+                        <div class="form-control ace_editor" style="height:180px;font-size:14px;" ng-model="resource_editor_model" ui-ace="resourceOptions" readonly="true"></div>
                     </accordion-group>
                     <accordion-group is-open="accordion_group_status.two.open">
                         <accordion-heading>
@@ -123,19 +119,12 @@
                                             <label class="btn btn-sm btn-primary" ng-change="output_change(radioModel)" ng-model="radioModel" btn-radio="'json'">JSON</label>
                                             <label class="btn btn-sm btn-primary" ng-change="output_change(radioModel)" ng-model="radioModel" btn-radio="'xml'">XML</label>
                                             <label class="btn btn-sm btn-primary" ng-change="output_change(radioModel)" ng-model="radioModel" btn-radio="'csv'">CSV</label>
-                                           <!-- <label class="btn btn-default">
-                                                <input type="radio" ng-change="change()" ng-model="radioModel" class="btn btn-default" value="json" />JSON</label>
-                                            <label class="btn btn-default">
-                                                <input type="radio" ng-change="change()" ng-model="radioModel" class="btn btn-default" value="xml" />XML</label>
-                                            <label class="btn btn-default">
-                                                <input type="radio" ng-change="change()" ng-model="radioModel" class="btn btn-default" value="csv" />CSV</label>-->
-                                            <div>{{radioModel}}</div>
                                         </div>
-                                        <button type="button" ng-click="fetch_tree()" class="btn btn-sm btn-danger pull-right">执行</button>
+                                        <button type="button" ng-click="query()" class="btn btn-sm btn-danger pull-right">执行</button>
                                         <button type="button" ng-click="splice_query()" class="btn btn-sm btn-success pull-right">拼接</button>
                                     </div>
                                     <!--<textarea id="textareaResult"  class="form-control"  rows="8"></textarea>-->
-                                    <div class="form-control ace_editor" style="height: 180px;" ui-ace="{theme:'twilight',mode:'xml'}"></div>
+                                    <div class="form-control ace_editor" style="height: 180px;font-size:14px;"  ui-ace="resultOptions"></div>
                                 </div>
                             </div>
                             <div class="form-group">
