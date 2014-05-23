@@ -35,6 +35,7 @@ angular.module('restUI.controllers', [])
                             type: 'success',
                             msg: '获取SQL Resource[' + $scope.resource_id + ']成功'
                         });
+                        $scope.splice_query();
                     }).
                     error(function(data) {
                         $scope.add_alert({
@@ -88,34 +89,24 @@ angular.module('restUI.controllers', [])
             };
 
             $scope.reload_item = function() {
+                $scope.clean_resource();
                 if (!$scope.check_empty($scope.resource_id)) {
+
                     $http({
                         method: $scope.method,
-                        url: $scope.url.reload_resource + $scope.resource_id
+                        url: $scope.url.resource_definition + $scope.resource_id
                     }).
                     success(function(data) {
-                        $http({
-                            method: $scope.method,
-                            url: $scope.url.resource_definition + $scope.resource_id
-                        }).
-                        success(function(data) {
-                            $scope.resource_editor_model = data;
-                        }).
-                        error(function(data) {
-                            $scope.add_alert({
-                                type: 'danger',
-                                msg: '获取SQL Resource[' + $scope.resource_id + ']失败'
-                            });
-                        });
+                        $scope.resource_editor_model = data;
                         $scope.add_alert({
                             type: 'success',
-                            msg: data
+                            msg: '重载SQL Resource[' + $scope.resource_id + ']成功'
                         });
                     }).
                     error(function(data) {
                         $scope.add_alert({
                             type: 'danger',
-                            msg: '重载SQL Resource失败'
+                            msg: '获取SQL Resource[' + $scope.resource_id + ']失败'
                         });
                     });
                 }
@@ -234,7 +225,7 @@ angular.module('restUI.controllers', [])
                     $http({
                         method: $scope.method,
                         url: $scope.splice.query,
-                        timeout: 10000
+                        timeout: 20000
                     }).
                     success(function(data) {
                         if (angular.isObject(data) || angular.isArray(data)) {
@@ -250,7 +241,7 @@ angular.module('restUI.controllers', [])
                     error(function(data) {
                         $scope.add_alert({
                             type: 'danger',
-                            msg: '超时(10秒)或获取SQL Resource[' + tmpQuery + ']查询结果失败'
+                            msg: '超时(20秒)或获取SQL Resource[' + tmpQuery + ']查询结果失败'
                         });
                     });
                 }

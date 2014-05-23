@@ -111,7 +111,7 @@
                         <form role="form">
                             <div class="form-group">
                                 <div>
-                                    <input type="text" class="form-control" id="inputFilter" placeholder="Filter" ng-model="splice.filter" />
+                                    <input type="text" ng-change="splice_query()" class="form-control" id="inputFilter" placeholder="Filter" ng-model="splice.filter" />
                                 </div>
                             </div>
                             <div class="row">
@@ -119,19 +119,19 @@
                                     <div class="form-group">
                                         <label for="inputLimit" class="control-label">Limit:</label>
                                         <div>
-                                            <input type="text" class="form-control" id="inputLimit" ng-model="splice.limit" />
+                                            <input type="text" ng-change="splice_query()" class="form-control" id="inputLimit" ng-model="splice.limit" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputOffset" class="control-label">Offset:</label>
                                         <div>
-                                            <input type="text" class="form-control" id="inputOffset" ng-model="splice.offset" />
+                                            <input type="text" ng-change="splice_query()" class="form-control" id="inputOffset" ng-model="splice.offset" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputOrderby" class="control-label">Orderby:</label>
                                         <div>
-                                            <input type="text" class="form-control" id="inputOrderby" ng-model="splice.orderby" />
+                                            <input type="text" ng-change="splice_query()" class="form-control" id="inputOrderby" ng-model="splice.orderby" />
                                         </div>
                                     </div>
                                 </div>
