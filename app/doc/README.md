@@ -133,8 +133,8 @@ group by sid,sn,lon,lat
 如果你的表结构很简单，本段内容可以略过。
 
 在定义查询中的每个表必需在元数据**metadata**中声明其角色**Role**，不同的表角色**Role**其数据请求处理是有区别的。下图描述了一个命名为**ActorFilm**的多对多**many-to-many**结构的表的物理数据模型：<br />
-![](http://10.151.96.18/restsql/doc/img/film_actor.png)
-![](http://10.151.96.18/restsql/doc/img/table_role.png)
+<img src="img/film_actor.png"></img>
+<img src="img/table_role.png"></img>
 
 1. 对于一个扁平结构的资源SQL Resource，一个**Parent**角色表必须声明；
 2. 对于一个一对多 one-to-many 的分级资源SQL Resource，一个**Parent**角色表,一个**Child**角色表都必须声明；
@@ -206,6 +206,9 @@ group by sid,sn,lon,lat
 
 ### 接口 HTTP API
 
+**这里列出的所有接口都是相对路径，须加上应用部署地址才是完成路径**
+**本应用的部署地址：http://10.151.96.18/restsql/**
+
 HTTP接口 | 类别 | 备注 | 参数 
 ----|------|----|------
 rest/res/{resName} | 资源SQL Resource | 用于查询数据，默认输出，数据体积小 | 可带参数
@@ -217,4 +220,38 @@ rest/res/clean/result | 功能性接口 | 用于清除查询结果缓存 | 无�
 rest/res/load/resourceTree | 功能性接口 | 用于查询资源定义树列表 | 无参数
 
 ###### 资源SQL Resource HTTP接口
-查询数据使用HTTP GET方法按名称访问，接口：rest/res/{resName}或rest/res/pretty/{resName}。
+接口：
+* **rest/res/{resName}**
+* **rest/res/pretty/{resName}**
+
+说明：
+>	1.查询资源数据使用HTTP GET方法按资源名称访问
+
+>	2.**{resName}**：资源名称，其命名方式与资源xml文件存放根目录的相对路径有关，与java的类Class命名相类似，如,设定资源根目录为:D:\res,
+>	那么资源定义D:\res\a.xml 的**{resName}**=a;资源定义D:\res\mll\b.xml 的**{resName}**=mll.b，以此类推。
+
+>	3.修改和增加资源接口方法：1.通过在线编辑器；2.通过ftp在相应地方覆盖或添加资源定义xml，ftp地址：10.151.96.18，用户密码：restsql:restsql
+
+>	4.参数在后面详细介绍
+
+###### 功能性接口
+**rest/res/clean/resource**
+
+用于清除应用资源Resource缓存，修改资源定义xml文件后须在HTTP客户端（浏览器）调用该接口，也就是在地址栏填入：
+
+http://10.151.96.18/restsql/rest/res/clean/resource
+
+然后回车；或者调用本应用提供的客户端的重载功能，原理一样。
+
+**rest/res/clean/result**
+
+本应用对每次查询的结果集进行缓存1分钟（可自定义），对于两个一模一样的查询在一分钟内结果一样，想立即清空结果集缓存调用本接口：
+
+http://10.151.96.18/restsql/rest/res/clean/result
+
+注意：调用**rest/res/clean/resource**接口时，会自动调用**rest/res/clean/result**接口
+
+---------------------------------------------------------------------------------------------
+### 接口参数
+
+ooo
