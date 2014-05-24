@@ -1,17 +1,18 @@
 # RESTFUL数据共享平台-----使用说明
 
 ### 简介
-> 本应用是基于HTTP协议的轻量级的数据访问层，支持MySQL和PostgreSQL，目前只实现了HTTP **Get**方法。
+> 本应用是基于HTTP协议的轻量级的数据访问层，支持MySQL和PostgreSQL，只实现HTTP **GET**方法，本文假设读者已具备基本SQL知识。
 
 ###### 特性
 1. 结合Java和HTTP API技术的一个SQL生成器
 2. 使用一个简单的RESTful HTTP API 把数据库数据序列化生成json、xml和csv
-3. 支持关系数据库表的一对一，一对多关系
+3. 支持关系数据库表的一对一，一对多和多对多关系
 4. 灵活、简单，只需会SQL即可发布自定义数据接口
 
 --------------------------------------------------------------------------------------------------
+
 ### 资源:Resource
-例子：**mll.nh_sum_r8**
+例子：**mll.nh_sum_r8**,Resource xml中不要包含虚线部分
 ~~~
 <?xml version="1.0" encoding="UTF-8"?>
 <rs:sqlResource xmlns:rs="http://restsql.org/schema"> ------------------------------------------1:sqlResource
@@ -66,33 +67,154 @@ group by sid,sn,lon,lat
 
 ###### 说明
 >	1:**sqlResource**  XML Root Element 格式固定
+~~~
+<rs:sqlResource xmlns:rs="http://restsql.org/schema"> 
+~~~
+>	2:**description**  非必需 出现次数：0或1;	用于说明本资源如何使用
 
->	2:**description**  非必需 出现次数：0或1	用于说明本资源如何使用
-
->	3:**test**	非必需 出现次数：0或1	用于生成元数据，当**test**存在，使用**test**生成元数据，否则使用**query**;<br />
+>	3:**test**	非必需 出现次数：0或1;	用于生成元数据，当**test**存在，使用**test**生成元数据，否则使用**query**;<br />
 >		**元数据SQL** = test 或 query的值 + "Limit 1 Offset 0" ;<br />
 >		**元数据** 为上述SQL执行结果的列的元数据：metadata；<br />
 >		当SQL语句包含**group by**时最好使用**test**增加查询条件，缩小查询范围，从而减少元数据查询时间
 
->	4:**query** 必需 出现次数：1 	结构必需与**test**一致，只是相对少部分过滤条件;<br />
+>	4:**query** 必需 出现次数：1; 	结构必需与**test**一致，只是相对减少部分过滤条件;<br />
 >		SQL语句构造使用**query**生成
+~~~
+<query>
+<![CDATA[
+SELECT  station_id sid, s.name sn, s.longitude lon, s.latitude lat, sum(r8) sum_r8 ,count(r8) count_r8 FROM 
+        v_aws_day left join dict.v_station_cn s on s.id=station_id
+WHERE (s.longitude between 112.5 and 113.5) 
+	AND (s.latitude between 22.5 and 23.5 )
+	AND r8 is not null
+    AND s.type = 'A'
+    AND s.id not in ('G2186','G3152','G3256','G3157','G3249','G1088')
+group by sid,sn,lon,lat
+]]>
+</query>
+~~~
 
->	5:**metadata**	必需 出现次数：1   数据表的元数据
+>	5:**metadata**	必需 出现次数：1;   数据表的元数据
 
->	6:**database**	必需 出现次数：1 	数据库名称
+>	6:**database**	必需 出现次数：1; 	数据库名称
 
->	7:**table**	必需 出现次数：1或多次 	数据库表<br />
+>	7:**table**	必需 出现次数：1或多次; 	数据库表<br />
 >		**name** 表名；**role**可为:**Parent,ParentExtension,Child,ChildExtension,Join**<br />
 >		**role**=**Parent**的表必需存在;**Parent,ParentExtension**为1对1关系;**Parent,Child**为1对多关系;**Join**用于多对多
+~~~
+<metadata>
+	<database default="meteo"/>
+	<table name="v_aws_day" role="Parent"/>
+	<table name="dict.v_station_cn" role="ParentExtension" />
+</metadata>
+~~~
 
->	8:**validateAttribute** 非必需 出现次数：0或1或多次 	用于格式化数据输出<br />
+>	8:**validateAttribute** 非必需 出现次数：0或1或多次; 	用于格式化数据输出<br />
 >		**name**对应列名；**type**可为：**Numeric,String,Datetime**<br />
 >		**format** pattern;日期数据datetime格式化后类型为String，非格式化日期数据类型为Long;更多请查看:<br />
->		[java.text.DecimalFormat](http://download.oracle.com/technetwork/java/javase/6/docs/zh/api/java/text/DecimalFormat.html)<br />
+>		[java.text.DecimalFormat](http://download.oracle.com/technetwork/java/javase/6/docs/zh/api/java/text/DecimalFormat.html)
 >		[java.text.SimpleDateFormat](http://download.oracle.com/technetwork/java/javase/6/docs/zh/api/java/text/SimpleDateFormat.html)
+~~~
+<validatedAttribute name="lon" type="Numeric"  format="0.0000" />
+<validatedAttribute name="lat" type="Numeric"  format="0.0000" />
+<validatedAttribute name="sum_r8" type="Numeric"  format="0.0" />
+~~~
 
-###### 备注
+###### 定义资源Resource备注
 >	**description,test,query,metadata,validateAttribute**出现的次序是固定的<br />
+>		**query**中的SQL关键字**WHERE**和**GROUP BY**必需全为大写或全为小写，如**Where**,**Group By**为错误写法，可能会导致不可知错误<br />
+>		**test**和**query**中不要包含SQL关键字**ORDER BY**,**LIMIT**,**OFFSET** <br />
 >		定义资源Resource更详细资料可查看：[SqlResource Schema](SqlResource.xsd),这需要一点xml的知识
 
+---------------------------------------------------------------------------------------------------------------------
+
+### 表角色:Table Role
+
+如果你的表结构很简单，本段内容可以略过。
+
+在定义查询中的每个表必需在元数据**metadata**中声明其角色**Role**，不同的表角色**Role**其数据请求处理是有区别的。下图描述了一个命名为**ActorFilm**的多对多**many-to-many**结构的表的物理数据模型：<br />
+![](img/film_actor.png)
+![](img/table_role.png)
+
+1. 对于一个扁平结构的资源SQL Resource，一个**Parent**角色表必须声明；
+2. 对于一个一对多 one-to-many 的分级资源SQL Resource，一个**Parent**角色表,一个**Child**角色表都必须声明；
+3. 对于一个多对多 many-to-many 的分级资源SQL Resource，一个**Parent**角色表,一个**Join**角色表,一个**Child**角色表都必须声明；
+4. **Parent, Child and Join**角色表只能定义一次，**ParentExtensions and ChildExtensions**角色表不是必需的，其定义可以为多个
+
+###### 资源定义 SQL Resource Definition
+
+这是一个命名为FilmRating的1对1结构资源，文件名为FilmRating.xml
+~~~
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:sqlResource xmlns:rs="http://restsql.org/schema">
+   <query>
+      select film.film_id, title, release_year,language_id, 
+      		 rental_duration,rental_rate,replacement_cost, film_rating_id, stars
+      from film, film_rating
+      where film.film_id = film_rating.film_id
+   </query>
+   <metadata>
+      <database default="sakila" />
+      <table name="film" role="Parent" />
+      <table name="film_rating" role="ParentExtension" />
+   </metadata>
+</rs:sqlResource>
+~~~
+
+这是一个命名为LanguageFilm的1对多结构资源，文件名为LanguageFilm.xml
+~~~
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:sqlResource xmlns:rs="http://restsql.org/schema">
+   <query>
+      select language.language_id, language.name, film_id, title, release_year
+      from language
+      left outer join film on film.language_id = language.language_id
+   </query>
+   <metadata>
+      <database default="sakila" />
+      <table name="language" role="Parent" />
+      <table name="film" role="Child" />
+   </metadata>
+</rs:sqlResource>
+~~~
+
+这是一个命名为ActorFilm的多对多结构资源，文件名为ActorFilm.xml
+~~~
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:sqlResource xmlns:rs="http://restsql.org/schema">
+   <query>
+      select actor.actor_id, first_name, last_name, actor_rating.stars,
+             film.film_id, title, release_year, film_rating.stars
+      from actor
+      left outer join actor_rating on actor.actor_id = actor_film.actor_id
+      left outer join film_actor on film_actor.actor_id = actor.actor_id
+      left outer join film on film_actor.film_id = film.film_id
+      left outer join film_rating on film.film_id = film_rating.film_id
+   </query>
+   <metadata>
+      <database default="sakila" />
+      <table name="actor" role="Parent" />
+      <table name="actor_rating" role="ParentExtension" />
+      <table name="film" role="Child" />
+      <table name="film_rating" role="ChildExtension" />
+      <table name="film_actor" role="Join" />
+   </metadata>
+</rs:sqlResource>
+~~~
+
 ---------------------------------------------------------------------------------------------------------------
+
+### 接口 HTTP API
+
+HTTP接口 | 类别 | 备注 | 参数 
+----|------|----|------
+rest/res/{resName} | 资源SQL Resource | 用于查询数据，默认输出，数据体积小 | 可带参数
+rest/res/pretty/{resName} | 资源SQL Resource  | 用于查询数据，格式化输出，便于查看 | 可带参数
+rest/res/file/{resName} | 资源SQL Resource | 用于获取资源定义xml文件 | 无参数
+rest/res/metadata/{resName} | 元数据 Metadata | 用于获取**select**的列的元数据定义xml文件 | 无参数
+rest/res/clean/resource | 功能性接口 | 用于清除Resource缓存 | 无参数
+rest/res/clean/result | 功能性接口 | 用于清除查询结果缓存 | 无参数
+rest/res/load/resourceTree | 功能性接口 | 用于查询资源定义树列表 | 无参数
+
+###### 资源SQL Resource HTTP接口
+查询数据使用HTTP GET方法按名称访问，接口：rest/res/{resName}或rest/res/pretty/{resName}。
