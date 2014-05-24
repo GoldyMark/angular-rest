@@ -133,8 +133,8 @@ group by sid,sn,lon,lat
 如果你的表结构很简单，本段内容可以略过。
 
 在定义查询中的每个表必需在元数据**metadata**中声明其角色**Role**，不同的表角色**Role**其数据请求处理是有区别的。下图描述了一个命名为**ActorFilm**的多对多**many-to-many**结构的表的物理数据模型：<br />
-![](img/film_actor.png)
-![](img/table_role.png)
+![](http://10.151.96.18/restsql/doc/img/film_actor.png)
+![](http://10.151.96.18/restsql/doc/img/table_role.png)
 
 1. 对于一个扁平结构的资源SQL Resource，一个**Parent**角色表必须声明；
 2. 对于一个一对多 one-to-many 的分级资源SQL Resource，一个**Parent**角色表,一个**Child**角色表都必须声明；
