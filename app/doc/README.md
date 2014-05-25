@@ -5,13 +5,18 @@
 
 ###### 特性
 1. 结合Java和HTTP API技术的一个SQL生成器
-2. 使用一个简单的RESTful HTTP API 把数据库数据序列化生成json、xml和csv
+2. 使用一个简单的RESTFUL HTTP API 把数据库数据序列化生成json、xml和csv
 3. 支持关系数据库表的一对一，一对多和多对多关系
 4. 灵活、简单，只需会SQL即可发布自定义数据接口
 
+###### 使用
+自己定义一个SQL资源（SQL Resource）xml文件，放到相应文件夹，即可通过HTTP接口访问使用
+
 --------------------------------------------------------------------------------------------------
 
-### 资源:Resource
+### SQL资源:（SQL Resource）
+每一个SQL资源就是一个数据接口，下面请看一个SQL资源定义例子。
+
 例子：**mll.nh_sum_r8**,Resource xml中不要包含虚线部分
 ~~~
 <?xml version="1.0" encoding="UTF-8"?>
@@ -245,13 +250,80 @@ http://10.151.96.18/restsql/rest/res/clean/resource
 
 **rest/res/clean/result**
 
-本应用对每次查询的结果集进行缓存1分钟（可自定义），对于两个一模一样的查询在一分钟内结果一样，想立即清空结果集缓存调用本接口：
+本应用对每次查询的结果集进行缓存1分钟（可自定义），也就是说对于两个一模一样的查询在一分钟内查询结果一样，想立即清空结果集缓存须调用本接口：
 
 http://10.151.96.18/restsql/rest/res/clean/result
 
 注意：调用**rest/res/clean/resource**接口时，会自动调用**rest/res/clean/result**接口
 
 ---------------------------------------------------------------------------------------------
-### 接口参数
 
-ooo
+### 接口参数
+接口**rest/res/{resName}**和**rest/res/pretty/{resName}**，可携带以下参数：
+
+参数名称 | 说明
+---------|------------------------------------ 
+_filter  | 过滤条件,用于查询数据
+_orderby | SQL 排序
+_limit   | SQL LIMIT 限定查询结果集的最大数量
+_offset  | SQL OFFSET 偏移
+_output  | 输出查询结果的文件类型，目前支持三种输出类型：json,xml,csv
+
+###### 参数：**_limit**
+本应用配置了2个关于**_limit**的系统参数：
+
+~~~
+# 如果查询不设参数_limit,或者_limit<=0, SQL LIMIT=response.sql.limit=500
+response.sql.limit=500
+
+# 如果查询参数_limit>response.sql.maxLimit, SQL LIMIT=response.sql.maxLimit=5000
+response.sql.maxLimit=5000
+~~~
+
+###### 参数：**_orderby**
+
+~~~
+参数：_orderby用于构造 SQL ORDER BY 子句 使用:（冒号）分开排序字段和（DESC或ASC）；使用;（分号）分开多个不同排序
+例子：
+_orderby=a:ASC    ORDER BY a ASC
+_orderby=a:b:DESC  ORDER BY a  b DESC
+_orderby=a:DESC;b:ASC  ORDER BY a  DESC, a ASC
+_orderby=a:b:DESC;c:ASC  ORDER BY a b DESC, c ASC
+
+注意必须包含每个排序必须包含（DESC或ASC）
+_orderby的值不要包含空格
+~~~
+
+###### 参数：**_filter**
+本应用的使用HTTP URL作为调用接口，因此须注意HTML URL 编码问题，详情请查看：
+[w3school HTML URL编码说明](http://www.w3school.com.cn/tags/html_ref_urlencode.html)
+
+~~~
+这里提一下几个常用转义符:
+空格：本应用" "空格可以用%20代替，觉得%20麻烦难看，就用+号;
+<（小于号）: < 用 %3c 代替
+>（大于号）: > 用 %3e 代替
+
+其他字符不用转义也很少出错，也许是浏览器自动转义或其它原因。
+~~~
+
+本应用参数**_filter**使用ECQL语言来描述,其定义请查看：[ECQL Reference](http://docs.geoserver.org/latest/en/user/filter/ecql_reference.html)
+
+---------------------------------------------------------------------------------------------
+
+### ECQL使用说明
+###### **Condition** 条件
+
+一个**filter condition**（过滤条件）通常是单个断言表达式，或者多个断言表达式的逻辑组合。
+
+**Syntax**                   | **Description**                                    | 描述
+---------------------------- | ------------------------------------------------   | ----------------------------------------------------
+Predicate                    | Single predicate expression                        | 单个断言表达式
+Condition AND , OR Condition | Conjunction or disjunction of conditions           | 使用（AND）或（OR）组合多个断言表达式（conditions）
+NOT Condition                | Negation of a condition                            | 否定条件
+\(   \[ Condition \]   \)    | Bracketing with \( or \[ controls evaluation order | 使用 \( \) 或者 \[ \] 来控制计算顺序
+
+###### Predicate 断言表达式
+Predicate（断言表达式）
+
+
