@@ -763,11 +763,18 @@ body .task-list{
 
 <ol>
 <li>结合Java和HTTP API技术的一个SQL生成器</li>
-<li>使用一个简单的RESTful HTTP API 把数据库数据序列化生成json、xml和csv</li>
+<li>使用一个简单的RESTFUL HTTP API 把数据库数据序列化生成json、xml和csv</li>
 <li>支持关系数据库表的一对一，一对多和多对多关系</li>
 <li>灵活、简单，只需会SQL即可发布自定义数据接口</li>
-</ol><hr><h3>
-<a name="user-content-%E8%B5%84%E6%BA%90resource" class="anchor" href="#%E8%B5%84%E6%BA%90resource"><span class="octicon octicon-link"></span></a>资源:Resource</h3>
+</ol><h6>
+<a name="user-content-%E4%BD%BF%E7%94%A8" class="anchor" href="#%E4%BD%BF%E7%94%A8"><span class="octicon octicon-link"></span></a>使用</h6>
+
+<p>自己定义一个SQL资源（SQL Resource）xml文件，放到相应文件夹，即可通过HTTP接口访问使用</p>
+
+<hr><h3>
+<a name="user-content-sql%E8%B5%84%E6%BA%90sql-resource" class="anchor" href="#sql%E8%B5%84%E6%BA%90sql-resource"><span class="octicon octicon-link"></span></a>SQL资源:（SQL Resource）</h3>
+
+<p>每一个SQL资源就是一个数据接口，下面请看一个SQL资源定义例子。</p>
 
 <p>例子：<strong>mll.nh_sum_r8</strong>,Resource xml中不要包含虚线部分</p>
 
@@ -888,7 +895,7 @@ group by sid,sn,lon,lat
 
 <p>如果你的表结构很简单，本段内容可以略过。</p>
 
-<p>在定义查询中的每个表必需在元数据<strong>metadata</strong>中声明其角色<strong>Role</strong>，不同的表角色<strong>Role</strong>其数据请求处理是有区别的。下图描述了一个命名为<strong>ActorFilm</strong>的多对多<strong>many-to-many</strong>结构的表的物理数据模型：<br><a href="https://camo.githubusercontent.com/c55f8a70588dbcfcf0b086fe4a7bdaef0cf4c264/687474703a2f2f31302e3135312e39362e31382f7265737473716c2f646f632f696d672f66696c6d5f6163746f722e706e67" target="_blank"><img src="img/film_actor.png" alt="" data-canonical-src="img/film_actor.png" style="max-width:100%;"></a><a href="https://camo.githubusercontent.com/e919930f3c37eebcd7fc0a91827b521595c86d95/687474703a2f2f31302e3135312e39362e31382f7265737473716c2f646f632f696d672f7461626c655f726f6c652e706e67" target="_blank"><img src="img/table_role.png" alt="" data-canonical-src="img/table_role.png" style="max-width:100%;"></a></p>
+<p>在定义查询中的每个表必需在元数据<strong>metadata</strong>中声明其角色<strong>Role</strong>，不同的表角色<strong>Role</strong>其数据请求处理是有区别的。下图描述了一个命名为<strong>ActorFilm</strong>的多对多<strong>many-to-many</strong>结构的表的物理数据模型：<br><a href="file://D:\git\angular-rest\app\doc/img/film_actor.png" target="_blank"><img src="file://D:\git\angular-rest\app\doc/img/film_actor.png" style="max-width:100%;"></a><a href="file://D:\git\angular-rest\app\doc/img/table_role.png" target="_blank"><img src="file://D:\git\angular-rest\app\doc/img/table_role.png" style="max-width:100%;"></a></p>
 
 <ol>
 <li>对于一个扁平结构的资源SQL Resource，一个<strong>Parent</strong>角色表必须声明；</li>
@@ -961,6 +968,9 @@ group by sid,sn,lon,lat
 <hr><h3>
 <a name="user-content-%E6%8E%A5%E5%8F%A3-http-api" class="anchor" href="#%E6%8E%A5%E5%8F%A3-http-api"><span class="octicon octicon-link"></span></a>接口 HTTP API</h3>
 
+<p><strong>这里列出的所有接口都是相对路径，须加上应用部署地址才是完成路径</strong>
+<strong>本应用的部署地址：<a href="http://10.151.96.18/restsql/">http://10.151.96.18/restsql/</a></strong></p>
+
 <table>
 <thead><tr>
 <th>HTTP接口</th>
@@ -1015,4 +1025,183 @@ group by sid,sn,lon,lat
 </table><h6>
 <a name="user-content-%E8%B5%84%E6%BA%90sql-resource-http%E6%8E%A5%E5%8F%A3" class="anchor" href="#%E8%B5%84%E6%BA%90sql-resource-http%E6%8E%A5%E5%8F%A3"><span class="octicon octicon-link"></span></a>资源SQL Resource HTTP接口</h6>
 
-<p>查询数据使用HTTP GET方法按名称访问，接口：rest/res/{resName}或rest/res/pretty/{resName}。</p></body></html>
+<p>接口：</p>
+
+<ul>
+<li><strong>rest/res/{resName}</strong></li>
+<li><strong>rest/res/pretty/{resName}</strong></li>
+</ul><p>说明：</p>
+
+<blockquote>
+<p>1.查询资源数据使用HTTP GET方法按资源名称访问</p>
+
+<p>2.<strong>{resName}</strong>：资源名称，其命名方式与资源xml文件存放根目录的相对路径有关，与java的类Class命名相类似，如,设定资源根目录为:D:\res,
+  那么资源定义D:\res\a.xml 的<strong>{resName}</strong>=a;资源定义D:\res\mll\b.xml 的<strong>{resName}</strong>=mll.b，以此类推。</p>
+
+<p>3.修改和增加资源接口方法：1.通过在线编辑器；2.通过ftp在相应地方覆盖或添加资源定义xml，ftp地址：10.151.96.18，用户密码：restsql:restsql</p>
+
+<p>4.参数在后面详细介绍</p>
+</blockquote>
+
+<h6>
+<a name="user-content-%E5%8A%9F%E8%83%BD%E6%80%A7%E6%8E%A5%E5%8F%A3" class="anchor" href="#%E5%8A%9F%E8%83%BD%E6%80%A7%E6%8E%A5%E5%8F%A3"><span class="octicon octicon-link"></span></a>功能性接口</h6>
+
+<p><strong>rest/res/clean/resource</strong></p>
+
+<p>用于清除应用资源Resource缓存，修改资源定义xml文件后须在HTTP客户端（浏览器）调用该接口，也就是在地址栏填入：</p>
+
+<p><a href="http://10.151.96.18/restsql/rest/res/clean/resource">http://10.151.96.18/restsql/rest/res/clean/resource</a></p>
+
+<p>然后回车；或者调用本应用提供的客户端的重载功能，原理一样。</p>
+
+<p><strong>rest/res/clean/result</strong></p>
+
+<p>本应用对每次查询的结果集进行缓存1分钟（可自定义），也就是说对于两个一模一样的查询在一分钟内查询结果一样，想立即清空结果集缓存须调用本接口：</p>
+
+<p><a href="http://10.151.96.18/restsql/rest/res/clean/result">http://10.151.96.18/restsql/rest/res/clean/result</a></p>
+
+<p>注意：调用<strong>rest/res/clean/resource</strong>接口时，会自动调用<strong>rest/res/clean/result</strong>接口</p>
+
+<hr><h3>
+<a name="user-content-%E6%8E%A5%E5%8F%A3%E5%8F%82%E6%95%B0" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%8F%82%E6%95%B0"><span class="octicon octicon-link"></span></a>接口参数</h3>
+
+<p>接口<strong>rest/res/{resName}</strong>和<strong>rest/res/pretty/{resName}</strong>，可携带以下参数：</p>
+
+<table>
+<thead><tr>
+<th>参数名称</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>_filter</td>
+<td>过滤条件,用于查询数据</td>
+</tr>
+<tr>
+<td>_orderby</td>
+<td>SQL 排序</td>
+</tr>
+<tr>
+<td>_limit</td>
+<td>SQL LIMIT 限定查询结果集的最大数量</td>
+</tr>
+<tr>
+<td>_offset</td>
+<td>SQL OFFSET 偏移</td>
+</tr>
+<tr>
+<td>_output</td>
+<td>输出查询结果的文件类型，目前支持三种输出类型：json,xml,csv</td>
+</tr>
+</tbody>
+</table><h6>
+<a name="user-content-%E5%8F%82%E6%95%B0_limit" class="anchor" href="#%E5%8F%82%E6%95%B0_limit"><span class="octicon octicon-link"></span></a>参数：<strong>_limit</strong>
+</h6>
+
+<p>本应用配置了2个关于<strong>_limit</strong>的系统参数：</p>
+
+<pre><code># 如果查询不设参数_limit,或者_limit&lt;=0, SQL LIMIT=response.sql.limit=500
+response.sql.limit=500
+
+# 如果查询参数_limit&gt;response.sql.maxLimit, SQL LIMIT=response.sql.maxLimit=5000
+response.sql.maxLimit=5000
+</code></pre>
+
+<h6>
+<a name="user-content-%E5%8F%82%E6%95%B0_orderby" class="anchor" href="#%E5%8F%82%E6%95%B0_orderby"><span class="octicon octicon-link"></span></a>参数：<strong>_orderby</strong>
+</h6>
+
+<pre><code>参数：_orderby用于构造 SQL ORDER BY 子句 使用:（冒号）分开排序字段和（DESC或ASC）；使用;（分号）分开多个不同排序
+例子：
+_orderby=a:ASC    ORDER BY a ASC
+_orderby=a:b:DESC  ORDER BY a  b DESC
+_orderby=a:DESC;b:ASC  ORDER BY a  DESC, a ASC
+_orderby=a:b:DESC;c:ASC  ORDER BY a b DESC, c ASC
+
+注意必须包含每个排序必须包含（DESC或ASC）
+_orderby的值不要包含空格
+</code></pre>
+
+<h6>
+<a name="user-content-%E5%8F%82%E6%95%B0_filter" class="anchor" href="#%E5%8F%82%E6%95%B0_filter"><span class="octicon octicon-link"></span></a>参数：<strong>_filter</strong>
+</h6>
+
+<p>本应用的使用HTTP URL作为调用接口，因此须注意HTML URL 编码问题，详情请查看：
+<a href="http://www.w3school.com.cn/tags/html_ref_urlencode.html">w3school HTML URL编码说明</a></p>
+
+<pre><code>这里提一下几个常用转义符:
+空格：本应用" "空格可以用%20代替，觉得%20麻烦难看，就用+号;
+&lt;（小于号） : &lt; 用 %3c 代替
+&gt;（大于号） : &gt; 用 %3e 代替
+% （%）     : % 用 %25 代替
+' （单引号）: ' 用 %27 代替
+其他字符不用转义也没问题。
+</code></pre>
+
+<p>本应用参数<strong>_filter</strong>使用ECQL语言来描述,其定义请查看：<a href="http://docs.geoserver.org/latest/en/user/filter/ecql_reference.html">ECQL Reference</a></p>
+
+<hr><h3>
+<a name="user-content-ecql%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" class="anchor" href="#ecql%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="octicon octicon-link"></span></a>ECQL使用说明</h3>
+
+<h6>
+<a name="user-content-condition-%E6%9D%A1%E4%BB%B6" class="anchor" href="#condition-%E6%9D%A1%E4%BB%B6"><span class="octicon octicon-link"></span></a>
+<strong>Condition</strong> 条件</h6>
+
+<p>一个<strong>filter condition</strong>（过滤条件）通常是单个断言表达式，或者多个断言表达式的逻辑组合。</p>
+
+<table>
+<thead><tr>
+<th><strong>Syntax</strong></th>
+<th><strong>Description</strong></th>
+<th>描述</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Predicate</td>
+<td>Single predicate expression</td>
+<td>单个断言表达式</td>
+</tr>
+<tr>
+<td>Condition AND , OR Condition</td>
+<td>Conjunction or disjunction of conditions</td>
+<td>使用（AND）或（OR）组合多个断言表达式（conditions）</td>
+</tr>
+<tr>
+<td>NOT Condition</td>
+<td>Negation of a condition</td>
+<td>否定条件</td>
+</tr>
+<tr>
+<td>(   [ Condition ]   )</td>
+<td>Bracketing with ( or [ controls evaluation order</td>
+<td>使用 ( ) 或者 [ ] 来控制计算顺序</td>
+</tr>
+</tbody>
+</table><h6>
+<a name="user-content-predicate-%E6%96%AD%E8%A8%80%E8%A1%A8%E8%BE%BE%E5%BC%8F" class="anchor" href="#predicate-%E6%96%AD%E8%A8%80%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="octicon octicon-link"></span></a>Predicate 断言表达式</h6>
+
+<p>Predicate（断言表达式）是指查询字段与某些值的布尔关系表达式</p>
+
+<pre><code>Expression = | &lt;&gt; | &lt; | &lt;= | &gt; | &gt;= Expression              比较操作（COMPARISON）
+Expression [ NOT ] BETWEEN Expression AND Expression        判别查询字段是否在范围之内（之外)（BETWEEN）
+Expression [ NOT ] LIKE | ILIKE like-pattern                简单的模式匹配，通常使用％字符作为通配符匹配任意数量的字符
+                                                            ILIKE不区分大小写的匹配（LIKE）
+Expression [ NOT ] IN ( Expression { ,Expression } )        判别查询字段是否在的一组值之中（IN）
+Expression IS [ NOT ] NULL                                  判别查询字段是否为空（IS NULL）
+</code></pre>
+
+<p>例子：查询自动站的站号、时间、日最高气温、日最大3秒风、8-8雨量</p>
+
+<pre><code>&lt;query&gt;
+&lt;![CDATA[
+SELECT station_id, datetime,  tmax, wf3smax, r8
+  FROM v_aws_day
+]]&gt;
+&lt;/query&gt;
+</code></pre>
+
+<pre><code>（COMPARISON）: _filter=r8%3e=50                      查询所有8-8雨量大于等于50毫米的自动站日记录
+   （BETWEEN）: _filter=r8+BETWEEN+50+AND+100         查询所有8-8雨量在50～100毫米之间的自动站日记录
+   （BETWEEN）: _filter=r8+NOT+BETWEEN+50+AND+100     查询所有8-8雨量在50～100毫米区间之外的自动站日记录
+      （LIKE）: _filter=station_id+LIKE+%27G22%25%27  查询(station_id like 'G22%')的自动站日记录
+</code></pre></body></html>

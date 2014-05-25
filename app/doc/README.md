@@ -301,10 +301,11 @@ _orderby的值不要包含空格
 ~~~
 这里提一下几个常用转义符:
 空格：本应用" "空格可以用%20代替，觉得%20麻烦难看，就用+号;
-<（小于号）: < 用 %3c 代替
->（大于号）: > 用 %3e 代替
-
-其他字符不用转义也很少出错，也许是浏览器自动转义或其它原因。
+<（小于号） : < 用 %3c 代替
+>（大于号） : > 用 %3e 代替
+% （%）     : % 用 %25 代替
+' （单引号）: ' 用 %27 代替
+其他字符不用转义也没问题。
 ~~~
 
 本应用参数**_filter**使用ECQL语言来描述,其定义请查看：[ECQL Reference](http://docs.geoserver.org/latest/en/user/filter/ecql_reference.html)
@@ -324,6 +325,31 @@ NOT Condition                | Negation of a condition                          
 \(   \[ Condition \]   \)    | Bracketing with \( or \[ controls evaluation order | 使用 \( \) 或者 \[ \] 来控制计算顺序
 
 ###### Predicate 断言表达式
-Predicate（断言表达式）
+Predicate（断言表达式）是指查询字段与某些值的布尔关系表达式
 
+~~~
+Expression = | <> | < | <= | > | >= Expression              比较操作（COMPARISON）
+Expression [ NOT ] BETWEEN Expression AND Expression        判别查询字段是否在范围之内（之外)（BETWEEN）
+Expression [ NOT ] LIKE | ILIKE like-pattern                简单的模式匹配，通常使用％字符作为通配符匹配任意数量的字符
+                                                            ILIKE不区分大小写的匹配（LIKE）
+Expression [ NOT ] IN ( Expression { ,Expression } )        判别查询字段是否在的一组值之中（IN）
+Expression IS [ NOT ] NULL                                  判别查询字段是否为空（IS NULL）
+~~~
 
+例子：查询自动站的站号、时间、日最高气温、日最大3秒风、8-8雨量
+
+~~~
+<query>
+<![CDATA[
+SELECT station_id, datetime,  tmax, wf3smax, r8
+  FROM v_aws_day
+]]>
+</query>
+~~~
+
+~~~
+（COMPARISON）: _filter=r8%3e=50                      查询所有8-8雨量大于等于50毫米的自动站日记录
+   （BETWEEN）: _filter=r8+BETWEEN+50+AND+100         查询所有8-8雨量在50～100毫米之间的自动站日记录
+   （BETWEEN）: _filter=r8+NOT+BETWEEN+50+AND+100     查询所有8-8雨量在50～100毫米区间之外的自动站日记录
+      （LIKE）: _filter=station_id+LIKE+%27G22%25%27  查询(station_id like 'G22%')的自动站日记录
+~~~
