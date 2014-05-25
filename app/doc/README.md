@@ -138,8 +138,8 @@ group by sid,sn,lon,lat
 如果你的表结构很简单，本段内容可以略过。
 
 在定义查询中的每个表必需在元数据**metadata**中声明其角色**Role**，不同的表角色**Role**其数据请求处理是有区别的。下图描述了一个命名为**ActorFilm**的多对多**many-to-many**结构的表的物理数据模型：<br />
-<img src="img/film_actor.png"></img>
-<img src="img/table_role.png"></img>
+<img src="/restsql/doc/img/film_actor.png"></img>
+<img src="/restsql/doc/img/table_role.png"></img>
 
 1. 对于一个扁平结构的资源SQL Resource，一个**Parent**角色表必须声明；
 2. 对于一个一对多 one-to-many 的分级资源SQL Resource，一个**Parent**角色表,一个**Child**角色表都必须声明；
@@ -273,8 +273,8 @@ _output  | 输出查询结果的文件类型，目前支持三种输出类型：
 本应用配置了2个关于**_limit**的系统参数：
 
 ~~~
-# 如果查询不设参数_limit,或者_limit<=0, SQL LIMIT=response.sql.limit=500
-response.sql.limit=500
+# 如果查询不设参数_limit,或者_limit<=0, SQL LIMIT=response.sql.limit=1000
+response.sql.limit=1000
 
 # 如果查询参数_limit>response.sql.maxLimit, SQL LIMIT=response.sql.maxLimit=5000
 response.sql.maxLimit=5000
@@ -295,7 +295,7 @@ _orderby的值不要包含空格
 ~~~
 
 ###### 参数：**_filter**
-本应用的使用HTTP URL作为调用接口，因此须注意HTML URL 编码问题，详情请查看：
+本应用使用HTTP URL作为调用接口，因此须注意HTML URL 编码问题，详情请查看：
 [w3school HTML URL编码说明](http://www.w3school.com.cn/tags/html_ref_urlencode.html)
 
 ~~~
@@ -303,7 +303,7 @@ _orderby的值不要包含空格
 空格：本应用" "空格可以用%20代替，觉得%20麻烦难看，就用+号;
 <（小于号） : < 用 %3c 代替
 >（大于号） : > 用 %3e 代替
-% （%）     : % 用 %25 代替
+% （百分号）: % 用 %25 代替
 ' （单引号）: ' 用 %27 代替
 其他字符不用转义也没问题。
 ~~~
@@ -348,8 +348,48 @@ SELECT station_id, datetime,  tmax, wf3smax, r8
 ~~~
 
 ~~~
+Predicate
+
 （COMPARISON）: _filter=r8%3e=50                      查询所有8-8雨量大于等于50毫米的自动站日记录
    （BETWEEN）: _filter=r8+BETWEEN+50+AND+100         查询所有8-8雨量在50～100毫米之间的自动站日记录
    （BETWEEN）: _filter=r8+NOT+BETWEEN+50+AND+100     查询所有8-8雨量在50～100毫米区间之外的自动站日记录
       （LIKE）: _filter=station_id+LIKE+%27G22%25%27  查询(station_id like 'G22%')的自动站日记录
+        （in）: _filter=station_id+IN+(%27G2213%27,%27G2218%27) 查询(station_id in ('G2213','G2218')的自动站日记录
+   （IS NULL）: _filter=r8+IS+NOT+NULL                查询(r8 is not null)的自动站日记录
 ~~~
+
+~~~
+Condition AND , OR Condition
+
+（AND）: _filter=r8%3e=50+and+wf3smax%3e=17.2   查询所有8-8雨量大于等于50毫米且日最大阵风大于等于8级的自动站日记录
+ （OR）: _filter=(r8%3e=50)+and+(r8%3c=10)      查询所有8-8雨量大于等于50毫米或8-8雨量小于等于10毫米的自动站日记录
+~~~
+
+~~~
+Temporal Predicate
+时间的表达式，日期时间类型除了可用BETWEEN，>=,<=,=,>,<这些操作符外，还可以用以下特定操作符
+Expression BEFORE Time                   判定时间值是否在某个时间点之前（BEFORE）
+Expression BEFORE OR DURING Time Period  判定时间值是否在某个时间段之内或时间段之前（BEFORE OR DURING）
+Expression DURING Time Period            判定时间值是否在某个时间段之内（DURING）
+Expression DURING OR AFTER Time Period   判定时间值是否在某个时间段之内或时间段之前（DURING OR AFTER）
+Expression AFTER Time                    判定时间值是否在某个时间点之后（AFTER）
+
+Time（时间）
+时间的格式固定为（必需精确到秒）：yyyy-mm-hhThh:mm:ss 
+例子：2014年1月1日 2014-01-01T00:00:00  
+如果在时间后面加字符Z  2014-01-01T00:00:00Z  则表示为世界时，不加Z则表示服务器时区，也就是北京时  
+
+
+Time Period（时间段）
+用/把2个时间（Time）点连起来表示时间段
+例子：2014年1月1日～2014年1月7日 2014-01-01T00:00:00/2014-01-07T00:00:00
+
+_filter=datetime+during+2014-01-01T00:00:00Z/2014-01-07T00:00:00Z
+等价于
+_filter=datetime+between+2014-01-01T00:00:00Z+and+2014-01-07T00:00:00Z
+~~~
+
+###### 备注
+1. ECQL的关键字最好全为大写或全为小写，譬如：BETWEEN也可以写作between
+2. 日期类型不须单引号包括（用也没问题）:_filter=datetime=2014-01-01T00:00:00，字符串类必需用单引号包括:_filter=station_id=%27G2213%27
+3. [ECQL Reference提到的操作符](http://docs.geoserver.org/latest/en/user/filter/ecql_reference.html)，而本文没提到的可能无效，譬如**Spatial Predicate**
