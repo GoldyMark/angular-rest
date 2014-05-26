@@ -751,6 +751,8 @@ body .task-list{
 </style><title>README</title></head><body><h1>
 <a name="user-content-restful%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB%E5%B9%B3%E5%8F%B0-----%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" class="anchor" href="#restful%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB%E5%B9%B3%E5%8F%B0-----%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="octicon octicon-link"></span></a>RESTFUL数据共享平台-----使用说明</h1>
 
+<p>VERSION:1.0 修改时间：2014-05-26</p>
+
 <h3>
 <a name="user-content-%E7%AE%80%E4%BB%8B" class="anchor" href="#%E7%AE%80%E4%BB%8B"><span class="octicon octicon-link"></span></a>简介</h3>
 
@@ -769,7 +771,7 @@ body .task-list{
 </ol><h6>
 <a name="user-content-%E4%BD%BF%E7%94%A8" class="anchor" href="#%E4%BD%BF%E7%94%A8"><span class="octicon octicon-link"></span></a>使用</h6>
 
-<p>自己定义一个SQL资源（SQL Resource）xml文件，放到相应文件夹，即可通过HTTP接口访问使用</p>
+<p>自己定义一个SQL资源（SQL Resource）xml文件，放到相应文件夹，即可通过HTTP接口访问使用；本应用是通过登录ftp添加资源定义xml，发布接口，ftp地址：10.151.96.18，用户密码：restsql:restsql</p>
 
 <hr><h3>
 <a name="user-content-sql%E8%B5%84%E6%BA%90sql-resource" class="anchor" href="#sql%E8%B5%84%E6%BA%90sql-resource"><span class="octicon octicon-link"></span></a>SQL资源:（SQL Resource）</h3>
@@ -1247,5 +1249,7 @@ _filter=datetime+between+2014-01-01T00:00:00Z+and+2014-01-07T00:00:00Z
 <li>日期类型不须单引号包括（用也没问题）:_filter=datetime=2014-01-01T00:00:00，字符串类必需用单引号包括:_filter=station_id=%27G2213%27</li>
 <li>
 <a href="http://docs.geoserver.org/latest/en/user/filter/ecql_reference.html">ECQL Reference提到的操作符</a>，而本文没提到的可能无效，譬如<strong>Spatial Predicate</strong>
+</li>
+<li>由于气象数据与时间密切相关，因此针对PostgreSql数据库实现了date_part(text, timestamp) date_trunc(text, timestamp)和to_char(timestamp, text)方法，可用于_filter;具体用法请参照<a href="http://www.postgresql.org/docs/9.3/static/functions-datetime.html">functions-datetime</a>和<a href="http://www.postgresql.org/docs/9.3/static/functions-formatting.html">functions-formatting</a>
 </li>
 </ol></body></html>

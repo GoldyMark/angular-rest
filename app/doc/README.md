@@ -1,4 +1,5 @@
 # RESTFUL数据共享平台-----使用说明
+VERSION:1.0 修改时间：2014-05-26
 
 ### 简介
 > 本应用是基于HTTP协议的轻量级的数据访问层，支持MySQL和PostgreSQL，只实现HTTP **GET**方法，本文假设读者已具备基本SQL知识。
@@ -10,7 +11,7 @@
 4. 灵活、简单，只需会SQL即可发布自定义数据接口
 
 ###### 使用
-自己定义一个SQL资源（SQL Resource）xml文件，放到相应文件夹，即可通过HTTP接口访问使用
+自己定义一个SQL资源（SQL Resource）xml文件，放到相应文件夹，即可通过HTTP接口访问使用；本应用是通过登录ftp添加资源定义xml，发布接口，ftp地址：10.151.96.18，用户密码：restsql:restsql
 
 --------------------------------------------------------------------------------------------------
 
@@ -393,3 +394,4 @@ _filter=datetime+between+2014-01-01T00:00:00Z+and+2014-01-07T00:00:00Z
 1. ECQL的关键字最好全为大写或全为小写，譬如：BETWEEN也可以写作between
 2. 日期类型不须单引号包括（用也没问题）:_filter=datetime=2014-01-01T00:00:00，字符串类必需用单引号包括:_filter=station_id=%27G2213%27
 3. [ECQL Reference提到的操作符](http://docs.geoserver.org/latest/en/user/filter/ecql_reference.html)，而本文没提到的可能无效，譬如**Spatial Predicate**
+4. 由于气象数据与时间密切相关，因此针对PostgreSql数据库实现了date_part\(text, timestamp\) date_trunc\(text, timestamp\)和to_char\(timestamp, text\)方法，可用于_filter;具体用法请参照[functions-datetime](http://www.postgresql.org/docs/9.3/static/functions-datetime.html)和[functions-formatting](http://www.postgresql.org/docs/9.3/static/functions-formatting.html)
