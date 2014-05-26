@@ -774,6 +774,36 @@ body .task-list{
 <p>自己定义一个SQL资源（SQL Resource）xml文件，放到相应文件夹，即可通过HTTP接口访问使用；本应用是通过登录ftp添加资源定义xml，发布接口，ftp地址：10.151.96.18，用户密码：restsql:restsql</p>
 
 <hr><h3>
+<a name="user-content-%E4%B8%80%E5%88%86%E9%92%9F%E6%95%99%E7%A8%8B" class="anchor" href="#%E4%B8%80%E5%88%86%E9%92%9F%E6%95%99%E7%A8%8B"><span class="octicon octicon-link"></span></a>一分钟教程</h3>
+
+<p>1.把下面内容复制到文本编辑器，保存为任意名称的xml文件（最好是英文名），如：sample.xml</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;rs:sqlResource xmlns:rs="http://restsql.org/schema"&gt;
+&lt;query&gt;
+&lt;![CDATA[
+SELECT station_id, datetime, r8
+  FROM v_aws_day
+]]&gt;
+&lt;/query&gt;
+&lt;metadata&gt;
+&lt;database default="meteo"/&gt;
+&lt;table name="v_aws_day" role="Parent"/&gt;
+&lt;/metadata&gt;
+&lt;/rs:sqlResource&gt;
+</code></pre>
+
+<p>2.然后通过ftp客户端，把文件sample.xml上传到根目录</p>
+
+<p>3.最后在浏览器输入以下地址,看看结果：<a href="http://10.151.96.18/restsql/rest/res/sample?_filter=station_id=%27G2213%27+and+datetime+between+2014-04-01T00:00:00+and+2014-04-30T00:00:00">http://10.151.96.18/restsql/rest/res/sample?_filter=station_id=%27G2213%27+and+datetime+between+2014-04-01T00:00:00+and+2014-04-30T00:00:00</a></p>
+
+<p>也可以试试：<a href="http://10.151.96.18/restsql/rest/res/sample?_filter=station_id=%27G2213%27+and+datetime+between+2014-04-01T00:00:00+and+2014-04-30T00:00:00&amp;_output=csv">http://10.151.96.18/restsql/rest/res/sample?_filter=station_id=%27G2213%27+and+datetime+between+2014-04-01T00:00:00+and+2014-04-30T00:00:00&amp;_output=csv</a></p>
+
+<p>The End.</p>
+
+<p>了解更多，请往下看</p>
+
+<hr><h3>
 <a name="user-content-sql%E8%B5%84%E6%BA%90sql-resource" class="anchor" href="#sql%E8%B5%84%E6%BA%90sql-resource"><span class="octicon octicon-link"></span></a>SQL资源:（SQL Resource）</h3>
 
 <p>每一个SQL资源就是一个数据接口，下面请看一个SQL资源定义例子。</p>

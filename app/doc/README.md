@@ -15,6 +15,37 @@ VERSION:1.0 修改时间：2014-05-26
 
 --------------------------------------------------------------------------------------------------
 
+### 一分钟教程
+1.把下面内容复制到文本编辑器，保存为任意名称的xml文件（最好是英文名），如：sample.xml
+
+~~~
+<?xml version="1.0" encoding="UTF-8"?>
+<rs:sqlResource xmlns:rs="http://restsql.org/schema">
+<query>
+<![CDATA[
+SELECT station_id, datetime, r8
+  FROM v_aws_day
+]]>
+</query>
+<metadata>
+<database default="meteo"/>
+<table name="v_aws_day" role="Parent"/>
+</metadata>
+</rs:sqlResource>
+~~~
+
+2.然后通过ftp客户端，把文件sample.xml上传到根目录
+
+3.最后在浏览器输入以下地址,看看结果：http://10.151.96.18/restsql/rest/res/sample?_filter=station_id=%27G2213%27+and+datetime+between+2014-04-01T00:00:00+and+2014-04-30T00:00:00
+
+也可以试试：http://10.151.96.18/restsql/rest/res/sample?_filter=station_id=%27G2213%27+and+datetime+between+2014-04-01T00:00:00+and+2014-04-30T00:00:00&_output=csv
+
+The End.
+
+了解更多，请往下看
+
+--------------------------------------------------------------------------------------------------------
+
 ### SQL资源:（SQL Resource）
 每一个SQL资源就是一个数据接口，下面请看一个SQL资源定义例子。
 
