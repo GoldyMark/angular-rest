@@ -1,5 +1,5 @@
 # RESTFUL数据共享平台-----使用说明
-VERSION:1.0 修改时间：2014-05-26
+VERSION:1.0 修改时间：2014-06-24
 
 ### 简介
 > 本应用是基于HTTP协议的轻量级的数据访问层，支持MySQL和PostgreSQL，只实现HTTP **GET**方法，本文假设读者已具备基本SQL知识。
@@ -250,6 +250,7 @@ HTTP接口 | 类别 | 备注 | 参数
 ----|------|----|------
 rest/res/{resName} | 资源SQL Resource | 用于查询数据，默认输出，数据体积小 | 可带参数
 rest/res/pretty/{resName} | 资源SQL Resource  | 用于查询数据，格式化输出，便于查看 | 可带参数
+rest/res/jsonp/{resName} | 资源SQL Resource  | 用于查询数据，jsonp格式输出 | 可带字符串参数 callback
 rest/res/file/{resName} | 资源SQL Resource | 用于获取资源定义xml文件 | 无参数
 rest/res/metadata/{resName} | 元数据 Metadata | 用于获取**select**的列的元数据定义xml文件 | 无参数
 rest/res/clean/resource | 功能性接口 | 用于清除Resource缓存 | 无参数
@@ -300,6 +301,7 @@ _orderby | SQL 排序
 _limit   | SQL LIMIT 限定查询结果集的最大数量
 _offset  | SQL OFFSET 偏移
 _output  | 输出查询结果的文件类型，目前支持三种输出类型：json,xml,csv
+callback | jsonp 回调函数名，值为字符串，默认为"success"
 
 ###### 参数：**_limit**
 本应用配置了2个关于**_limit**的系统参数：
@@ -315,12 +317,12 @@ response.sql.maxLimit=5000
 ###### 参数：**_orderby**
 
 ~~~
-参数：_orderby用于构造 SQL ORDER BY 子句 使用:（冒号）分开排序字段和（DESC或ASC）；使用;（分号）分开多个不同排序
+参数：_orderby用于构造 SQL ORDER BY 子句 使用+（加号）分开排序字段和（DESC或ASC）；使用,（逗号）分开多个不同排序
 例子：
-_orderby=a:ASC    ORDER BY a ASC
-_orderby=a:b:DESC  ORDER BY a  b DESC
-_orderby=a:DESC;b:ASC  ORDER BY a  DESC, a ASC
-_orderby=a:b:DESC;c:ASC  ORDER BY a b DESC, c ASC
+_orderby=a+ASC    ORDER BY a ASC
+_orderby=a,b+DESC  ORDER BY a,b DESC
+_orderby=a+DESC,b+ASC  ORDER BY a DESC,b ASC
+_orderby=a,b+DESC,c+ASC  ORDER BY a,b DESC, c ASC
 
 注意必须包含每个排序必须包含（DESC或ASC）
 _orderby的值不要包含空格
@@ -333,10 +335,11 @@ _orderby的值不要包含空格
 ~~~
 这里提一下几个常用转义符:
 空格：本应用" "空格可以用%20代替，觉得%20麻烦难看，就用+号;
+% （百分号）: % 用 %25 代替（必须）
 <（小于号） : < 用 %3c 代替
 >（大于号） : > 用 %3e 代替
-% （百分号）: % 用 %25 代替
 ' （单引号）: ' 用 %27 代替
+" （双引号）: " 用 %22 代替
 其他字符不用转义也没问题。
 ~~~
 
@@ -425,4 +428,5 @@ _filter=datetime+between+2014-01-01T00:00:00Z+and+2014-01-07T00:00:00Z
 1. ECQL的关键字最好全为大写或全为小写，譬如：BETWEEN也可以写作between
 2. 日期类型不须单引号包括（用也没问题）:_filter=datetime=2014-01-01T00:00:00，字符串类必需用单引号包括:_filter=station_id=%27G2213%27
 3. [ECQL Reference提到的操作符](http://docs.geoserver.org/latest/en/user/filter/ecql_reference.html)，而本文没提到的可能无效，譬如**Spatial Predicate**
-4. 由于气象数据与时间密切相关，因此针对PostgreSql数据库实现了date_part\(text, timestamp\) date_trunc\(text, timestamp\)和to_char\(timestamp, text\)方法，可用于_filter;具体用法请参照[functions-datetime](http://www.postgresql.org/docs/9.3/static/functions-datetime.html)和[functions-formatting](http://www.postgresql.org/docs/9.3/static/functions-formatting.html)
+4. id字段不能用like
+5. 由于气象数据与时间密切相关，因此针对PostgreSql数据库实现了date_part\(text, timestamp\) date_trunc\(text, timestamp\)和to_char\(timestamp, text\)方法，可用于_filter;具体用法请参照[functions-datetime](http://www.postgresql.org/docs/9.3/static/functions-datetime.html)和[functions-formatting](http://www.postgresql.org/docs/9.3/static/functions-formatting.html)
