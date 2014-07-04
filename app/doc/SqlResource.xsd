@@ -3,9 +3,7 @@
 	elementFormDefault="unqualified" jaxb:version="2.0"
 	xmlns="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
 	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:rs="http://restsql.org/schema">
-
 	<element name="sqlResource" type="rs:SqlResource"></element>
-
 	<complexType name="SqlResource">
 		<annotation>
 			<appinfo>
@@ -27,28 +25,24 @@
 				minOccurs="0"></element>
 		</sequence>
 	</complexType>
-
 	<complexType name="Test">
 		<simpleContent>
 			<extension base="string">
 			</extension>
 		</simpleContent>
 	</complexType>
-
 	<complexType name="Query">
 		<simpleContent>
 			<extension base="string">
 			</extension>
 		</simpleContent>
 	</complexType>
-
 	<complexType name="Description">
 		<simpleContent>
 			<extension base="string">
 			</extension>
 		</simpleContent>
 	</complexType>
-
 	<complexType name="ValidatedAttribute">
 		<attribute name="name" type="string" use="required"></attribute>
 		<attribute name="type" use="required">
@@ -71,8 +65,6 @@
 		<attribute name="replacement" type="string" use="optional"></attribute>
 		<attribute name="nullValue" type="string" use="optional"></attribute>
 	</complexType>
-
-
 	<complexType name="MetaData">
 		<sequence>
 			<element name="database" type="rs:Database" maxOccurs="1"
@@ -81,7 +73,6 @@
 				minOccurs="1"></element>
 		</sequence>
 	</complexType>
-
 	<complexType name="Database">
 		<attribute name="default" type="string" use="required">
 			<annotation>
@@ -91,7 +82,6 @@
 			</annotation>
 		</attribute>
 	</complexType>
-
 	<complexType name="Table">
 		<attribute name="name" type="string" use="required"></attribute>
 		<attribute name="alias" type="string" use="optional"></attribute>
@@ -110,10 +100,9 @@
 	<complexType name="HttpConfig">
 		<sequence>
 			<element name="response" type="rs:HttpResponse" maxOccurs="1"
-				minOccurs="0"></element>
+				minOccurs="1"></element>
 		</sequence>
 	</complexType>
-
 	<complexType name="HttpResponse">
 		<attribute name="cacheControl" type="string" use="optional">
 			<annotation>
@@ -123,6 +112,10 @@
 					{cache-directive}, ...
 				</documentation>
 			</annotation>
+		</attribute>
+		<attribute name="accessControl" type="string" use="optional">
+		</attribute>
+		<attribute name="csvUseHeader" type="boolean" use="optional">
 		</attribute>
 	</complexType>
 </schema>
