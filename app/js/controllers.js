@@ -89,7 +89,7 @@ angular.module('restUI.controllers', [])
             };
 
             $scope.reload_item = function() {
-                //$scope.clean_resource();
+                $scope.clean_resource();
                 if (!$scope.check_empty($scope.resource_id)) {
 
                     $http({
