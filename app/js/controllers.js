@@ -89,7 +89,7 @@ angular.module('restUI.controllers', [])
             };
 
             $scope.reload_item = function() {
-                $scope.clean_resource();
+                //$scope.clean_resource();
                 if (!$scope.check_empty($scope.resource_id)) {
 
                     $http({
@@ -144,7 +144,7 @@ angular.module('restUI.controllers', [])
                     heading: '数据查询'
                 },
                 three: {
-                    open: true,
+                    open: false,
                     heading: '日志'
                 }
             };
@@ -157,6 +157,7 @@ angular.module('restUI.controllers', [])
                 offset: '',
                 orderby: '',
                 query: '',
+                visible: '',
                 output: 'json',
                 link: '?'
             };
@@ -178,6 +179,10 @@ angular.module('restUI.controllers', [])
                     }
                     if (!$scope.check_empty($scope.splice.orderby)) {
                         val = val + $scope.splice.link + '_orderby=' + $scope.splice.orderby;
+                        $scope.splice.link = '&';
+                    }
+                    if (!$scope.check_empty($scope.splice.visible)) {
+                        val = val + $scope.splice.link + '_visible=' + $scope.splice.visible;
                         $scope.splice.link = '&';
                     }
                     val = val + $scope.splice.link + '_output=' + $scope.splice.output;
@@ -225,7 +230,7 @@ angular.module('restUI.controllers', [])
                     $http({
                         method: $scope.method,
                         url: $scope.splice.query,
-                        timeout: 20000
+                        timeout: 30000
                     }).
                     success(function(data) {
                         if (angular.isObject(data) || angular.isArray(data)) {
@@ -241,7 +246,7 @@ angular.module('restUI.controllers', [])
                     error(function(data) {
                         $scope.add_alert({
                             type: 'danger',
-                            msg: '超时(20秒)或获取SQL Resource[' + tmpQuery + ']查询结果失败'
+                            msg: '超时(30秒)或获取SQL Resource[' + tmpQuery + ']查询结果失败'
                         });
                     });
                 }
