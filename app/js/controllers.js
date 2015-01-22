@@ -5,11 +5,13 @@ angular.module('restUI.controllers', [])
         function($scope, $http) {
             $scope.resource_id = '';
             $scope.resource_url = 'rest/res/pretty/';
+            $scope.sql_url = 'rest/res/sql/';
             $scope.method = 'GET';
 
             $scope.url = {
                 resource_base: 'rest/res/',
                 resource_pretty: 'rest/res/pretty/',
+                resource_sql: 'rest/res/sql/',
                 resource_tree: 'rest/res/load/resourceTree',
                 resource_definition: 'rest/res/file/',
                 clean_resource: 'rest/res/clean/resource',
@@ -159,12 +161,13 @@ angular.module('restUI.controllers', [])
                 query: '',
                 visible: '',
                 output: 'json',
-                link: '?'
+                link: '?',
+                sql: ''
             };
             $scope.splice_query = function() {
 
                 if (!$scope.check_empty($scope.resource_id)) {
-                    var val = $scope.resource_url + $scope.resource_id;
+                    var val = '';
                     if (!$scope.check_empty($scope.splice.filter)) {
                         val = val + $scope.splice.link + '_filter=' + $scope.splice.filter;
                         $scope.splice.link = '&';
@@ -188,7 +191,8 @@ angular.module('restUI.controllers', [])
                     val = val + $scope.splice.link + '_output=' + $scope.splice.output;
 
                     $scope.splice.link = '?';
-                    $scope.splice.query = val;
+                    $scope.splice.query = $scope.resource_url + $scope.resource_id + val;
+                    $scope.splice.sql = $scope.sql_url + $scope.resource_id + val;
                 }
             };
 
@@ -247,6 +251,29 @@ angular.module('restUI.controllers', [])
                         $scope.add_alert({
                             type: 'danger',
                             msg: '超时(30秒)或获取SQL Resource[' + tmpQuery + ']查询结果失败'
+                        });
+                    });
+                }
+            };
+
+            $scope.load_sql = function() {
+               $scope.aceeditor.setValue('');
+                var tmpQuery = $scope.splice.sql;
+                if (!$scope.check_empty($scope.splice.sql)) {
+                    $http({
+                        method: $scope.method,
+                        url: $scope.splice.sql,
+                        timeout: 30000
+                    }).
+                    success(function(data) {
+                       
+                            $scope.aceeditor.setValue(data);
+                        
+                    }).
+                    error(function(data) {
+                        $scope.add_alert({
+                            type: 'danger',
+                            msg: '超时(30秒)或获取SQL[' + tmpQuery + ']失败'
                         });
                     });
                 }
